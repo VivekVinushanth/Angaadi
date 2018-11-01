@@ -91,7 +91,7 @@ CREATE TABLE `Cart` (
   `SKU` int,
   `customer_ID` int,
   Primary KEY(`customer_ID`),
-  Foreign KEY(`SKU`) references,
+  Foreign KEY(`SKU`) references 'Product_Variant'('SKU'),
   Foreign KEY (`customer_ID`) references `Customer`(`customer_ID`)
 );
 
