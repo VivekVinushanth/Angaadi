@@ -78,9 +78,9 @@ CREATE TABLE `Order` (
 );
 
 CREATE TABLE `Product` (
-  `product_ID` <type>,
-  `product_name` <type>,
-  `brand` <type>,
+  `product_ID` int,
+  `product_name` varchar(255),
+  `brand` varchar(255),
   PRIMARY KEY (`product_ID`)
 );
 
