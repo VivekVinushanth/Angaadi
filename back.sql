@@ -7,7 +7,7 @@ CREATE TABLE `Shipping_Address` (
   Primary KEY (`order_ID`),
   Foreign KEY (`order_ID`)
 );
-hello
+
 CREATE TABLE `Payment` (
   `Payment_ID` int,
   `order_Id` int,
