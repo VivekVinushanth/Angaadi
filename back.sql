@@ -1,4 +1,3 @@
-
 CREATE TABLE `Shipping_Address` (
   `order_ID` int,
   `City` varchar(255),
@@ -6,7 +5,7 @@ CREATE TABLE `Shipping_Address` (
   `Address_Line1` varchar(255),
   `Address_Line2` varchar(255),
   Primary KEY (`order_ID`),
-  Foreign KEY (`order_ID`)
+  Foreign KEY (`order_ID`) references `Orders`(`order_ID`)
 );
 
 CREATE TABLE `Payment` (
@@ -16,7 +15,7 @@ CREATE TABLE `Payment` (
   `Payment_Date` date,
   `Payment_status` enum("paid","Not Paid"),
   PRIMARY KEY (`Payment_ID`),
-  Foreign KEY (`order_Id`)
+  Foreign KEY (`order_ID`) references `Orders`(`order_ID`)
 );
 
 CREATE TABLE `Variant_Detail` (
@@ -24,7 +23,7 @@ CREATE TABLE `Variant_Detail` (
   `Attribute_Name` varchar(255),
   `Attribute_Value` varchar(255),
   Primary KEY(`SKU`)
-  Foreign KEY (`SKU`)
+  Foreign KEY (`SKU`) references `Product_Variant`(`SKU`)
 );
 
 CREATE TABLE `Category_Products` (
@@ -32,9 +31,9 @@ CREATE TABLE `Category_Products` (
   `sub_category_name` varchar(255),
   `product_ID`int,
   PRIMARY KEY  (`category_name`, `sub_category_name`, `product_ID`),
-  Foreign KEY (`category_name`),
-  Foreign KEY (`sub_category_name`),
-  Foreign KEY (`product_ID`)
+  Foreign KEY (`category_name`) references `Category` (`category_name`) ,
+  Foreign KEY (`sub_category_name`) references `Category` (`sub_category_name`) ,
+  Foreign KEY (`product_ID`) references `Product`(`product_ID`)
 );
 
 CREATE TABLE `Product_Variant` (
@@ -45,7 +44,7 @@ CREATE TABLE `Product_Variant` (
   `unit_Price` numeric(9,2),
   `weight` numeric(5,2),
   PRIMARY KEY (`SKU`),
-  foreign KEY(`product_ID`)
+   Foreign KEY (`product_ID`) references `Product`(`product_ID`)
 );
 
 CREATE TABLE `Cart` (
@@ -54,8 +53,8 @@ CREATE TABLE `Cart` (
   `SKU` int,
   `customer_ID` int,
   Primary KEY(`customer_ID`),
-  Foreign KEY(`SKU`),
-  FOREIGN key (`customer_ID`)
+  Foreign KEY(`SKU`) references,
+  Foreign KEY (`customer_ID`) references `Customer`(`customer_ID`)
 );
 
 CREATE TABLE `Freight_Details` (
@@ -64,17 +63,17 @@ CREATE TABLE `Freight_Details` (
   `Shipping_Status` enum ("Processing","delivered"),
   `Shipping_date` datetime,
   PRIMARY KEY (`Tracking_ID`),
-  Foreign KEY (`order_ID`)
+  Foreign KEY (`order_ID`) references `Orders`(`order_ID`)
 );
 
-CREATE TABLE `Order` (
+CREATE TABLE `Orders` (
   `order_ID` int,
   `Total_Price` numeric(9,2),
   `Order_date` datetime,
   `Delivery_Method` enum("Home Delivery","Store Pickup"),
   `customer_ID` int,
   PRIMARY KEY (`order_ID`),
-  Foreign KEY (`customer_ID`)
+  Foreign KEY (`customer_ID`) references `Customer`(`customer_ID`)
 );
 
 CREATE TABLE `Product` (
@@ -85,41 +84,52 @@ CREATE TABLE `Product` (
 );
 
 CREATE TABLE `Order_Detail` (
-  `SKU` <type>,
-  `order_id` <type>,
-  `Quantity` <type>,
-  `` <type>,
-  `` <type>,
-  `` <type>,
-  KEY `PK,FK` (`SKU`, `order_id`)
+  `SKU` int,
+  `order_id` int,
+  `Quantity` int,
+  Primary KEY  (`SKU`, `order_id`),
+  Foreign KEY (`SKU`) references `Product_Variant`(`SKU`)
 );
 
 CREATE TABLE `Guest` (
-  `Date_logged_In` <type>
+`customer_ID` int NOT NULL AUTO_INCREMENT,
+  `Email_ID` varchar(255),
+  `UserName` varchar(255) ,
+  `Street_name` varchar(255),
+  `FirstName` varchar(255),
+  `LastName` varchar(255),
+  `Date_logged_In` date,
+  PRIMARY KEY (`customer_ID`) 
 );
 
 CREATE TABLE `Customer` (
-  `customer_ID` <type>,
-  `Email_ID` <type>,
-  `UserName` <type>,
-  `City` <type>,
-  `Street_name` <type>,
-  `FirstName` <type>,
-  `LastName` <type>,
-  PRIMARY KEY (`customer_ID`)
+  `customer_ID` int NOT NULL AUTO_INCREMENT,
+  `Email_ID` varchar(255),
+  `UserName` varchar(255) ,
+  `Street_name` varchar(255),
+  `FirstName` varchar(255),
+  `LastName` varchar(255),
+  PRIMARY KEY (`customer_ID`) 
+);
+
+CREATE TABLE `City`(
+	`City` varchar(255),
+	`Street_name` varchar(255), 
+     Primary KEY (`City`,`Street_name`)
 );
 
 CREATE TABLE `Category` (
-  `category_name` <type>,
-  `sub_category_name` <type>,
-  `product_ID` <type>,
-  PRIMARY KEY (`category_name`, `sub_category_name`),
-  KEY `FK` (`product_ID`)
+  `category_name` varchar(255),
+  `sub_category_name` varchar(255),
+  `product_ID` int,
+  PRIMARY KEY (`category_name`,`sub_category_name`),
+  Foreign KEY  (`product_ID`) references `Product`(`product_ID`)
 );
 
 CREATE TABLE `Customer_Telephone` (
-  `customer_ID` <type>,
-  `telephone` <type>,
-  KEY `PK,FK` (`customer_ID`)
+  `customer_ID` int,
+  `telephone` varchar(10),
+  PRIMARY KEY `customer_ID`,
+   FOREIGN KEY (`customer_ID`) references `Customer`(customer_ID`)
 );
 
