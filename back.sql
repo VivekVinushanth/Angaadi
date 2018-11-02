@@ -121,11 +121,10 @@ CREATE TABLE `Guest` (
 `customer_ID` int NOT NULL AUTO_INCREMENT,
   `Email_ID` varchar(255),
   `UserName` varchar(255) ,
-  `Street_name` varchar(255),
   `FirstName` varchar(255),
   `LastName` varchar(255),
+  `Street_name` varchar(255),
   `City` varchar(255),
-   `Phone` int,
   `Date_logged_In` datetime,
   PRIMARY KEY (`customer_ID`) 
 );
