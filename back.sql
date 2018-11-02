@@ -4,7 +4,6 @@ CREATE TABLE `Customer` (
   `UserName` varchar(255) ,
   `Street_name` varchar(255),
   `City` varchar(255),
-   `Phone` int,
   `FirstName` varchar(255),
   `LastName` varchar(255),
   PRIMARY KEY (`customer_ID`) 
@@ -34,7 +33,7 @@ CREATE TABLE `Payment` (
   `Payment_ID` int,
   `order_Id` int,
   `Payment_method` enum("pay by card","pay on delivery"),
-  `Payment_Date` date,
+  `Payment_Date` datetime,
   `Payment_status` enum("paid","Not Paid"),
   PRIMARY KEY (`Payment_ID`),
   Foreign KEY (`order_ID`) references `Orders`(`order_ID`)
@@ -94,7 +93,7 @@ CREATE TABLE `Cart` (
   `SKU` int,
   `customer_ID` int,
   Primary KEY(`customer_ID`),
-  Foreign KEY(`SKU`) references,
+  Foreign KEY(`SKU`) references 'Product_Variant'('SKU'),
   Foreign KEY (`customer_ID`) references `Customer`(`customer_ID`)
 );
 
@@ -127,22 +126,14 @@ CREATE TABLE `Guest` (
   `LastName` varchar(255),
   `City` varchar(255),
    `Phone` int,
-  `Date_logged_In` date,
+  `Date_logged_In` datetime,
   PRIMARY KEY (`customer_ID`) 
-);
-
-
-
-CREATE TABLE `City`(
-	`City` varchar(255),
-	`Street_name` varchar(255), 
-     Primary KEY (`City`,`Street_name`)
 );
 
 
 CREATE TABLE `Customer_Telephone` (
   `customer_ID` int,
-  `telephone` varchar(10),
+  `telephone` int,
   PRIMARY KEY `customer_ID`,
    FOREIGN KEY (`customer_ID`) references `Customer`(customer_ID`)
 );
