@@ -3,6 +3,7 @@ CREATE TABLE `Customer` (
   `Email_ID` varchar(255),
   `UserName` varchar(255) ,
   `Street_name` varchar(255),
+  `City` varchar(255),
   `FirstName` varchar(255),
   `LastName` varchar(255),
   PRIMARY KEY (`customer_ID`) 
@@ -52,6 +53,7 @@ CREATE TABLE `Product_Variant` (
   `stock` int,
   `unit_Price` numeric(9,2),
   `weight` numeric(5,2),
+   `Image` blob,
   PRIMARY KEY (`SKU`),
    Foreign KEY (`product_ID`) references `Product`(`product_ID`)
 );
@@ -122,16 +124,10 @@ CREATE TABLE `Guest` (
   `Street_name` varchar(255),
   `FirstName` varchar(255),
   `LastName` varchar(255),
+  `City` varchar(255),
+   `Phone` int,
   `Date_logged_In` datetime,
   PRIMARY KEY (`customer_ID`) 
-);
-
-
-
-CREATE TABLE `City`(
-	`City` varchar(255),
-	`Street_name` varchar(255), 
-     Primary KEY (`City`,`Street_name`)
 );
 
 
