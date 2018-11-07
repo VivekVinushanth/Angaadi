@@ -1,24 +1,3 @@
-insert into Category values('Cellphones & Telecommunications','Mobile Phones',10000);
-insert into Category values('Cellphones & Telecommunications','Mobile Phones',10001);
-insert into Category values('Computer & Office','Gaming Laptops',10002);
-insert into Category values('Computer & Office','Gaming Laptops',10003);
-insert into Category values('Computer & Office','Laptops',10004);
-insert into Category values('Computer & Office','Laptops',10005);
-insert into Category values('Consumer Electronics','Digital Cameras',10006);
-insert into Category values('Consumer Electronics','Digital Cameras',10007);
-insert into Category values('Consumer Electronics','Digital Cameras',10008);
-insert into Category values('Consumer Electronics','Digital Cameras',10009);
-insert into Category values('Sports & Entertainment','Bicycle',10010);
-insert into Category values('Sports & Entertainment','Bicycle',10011);
-insert into Category values('Sports & Entertainment','Bicycle',10012);
-insert into Category values('Watches','Men Watches',10013);
-insert into Category values('Watches','Men Watches',10014);
-insert into Category values('Watches','Men Watches',10015);
-insert into Category values('Watches','Men Watches',10016);
-insert into Category values('Watches','Men Watches',10017);
-insert into Category values('Watches','Men Watches',10018);
-insert into Category values('Watches','Men Watches',10019);
-
 insert into Product values(10000,'xiaomi Redmi Note 5','Xiaomi');
 insert into Product values(10001,'xiaomi Redmi S2','Xiaomi');
 insert into Product values(10002,'ASUS FX63VD Notebook','ASUS');
@@ -38,17 +17,35 @@ insert into Product values(10015,'shshd Business Skeleton Watch','shshd');
 insert into Product values(10016,'contena 2018 Women Watches Romantic Stainless Steel','contena');
 insert into Product values(10017,'PAUL VALENTINE Luxury Quartz Wrist watch','PAUL VALENTINE');
 insert into Product values(10018,'Daniel Sabrina 2018 Women Quartz  wrist Watch men Style','Daniel Sabrina');
-
-
-insert into Product_Variant values(20000,10000,2000,10,20000.00,0.30,);
-insert into Product_Variant values(20001,10000,2001,22,30000.00,0.30,);
-insert into Product_Variant values(20002,10000,2001,6,40000.00,0.30,);
-insert into Product_Variant values(20003,10001,20002,1,20000.00,0.30,);
-insert into Product_Variant values(20004,10002,2003,4,20000.00,5.00,);
-insert into Product_Variant values(20005,10003,2003,6,20000.00,6.00,);
-insert into Product_Variant values(20006,10003,2004,10,20000.00,4.50,);
 insert into Product values(10019,'OTOKY 2018 Dress Watches Faux Chronograph Quartz Casual','OTOKY');
 
 
+insert into Category values('Cellphones & Telecommunications','Mobile Phones');
+insert into Category values('Computer & Office','Gaming Laptops');
+insert into Category values('Computer & Office','Laptops');
+insert into Category values('Consumer Electronics','Digital Cameras');
+insert into Category values('Sports & Entertainment','Bicycle');
+insert into Category values('Watches','Men Watches');
+insert into Category values('Watches','Women Watches');
 
 
+insert into Category_Products values('Mobile Phones',10000);
+insert into Category_Products values('Mobile Phones',10001);
+insert into Category_Products values('Gaming Laptops',10002);
+insert into Category_Products values('Gaming Laptops',10003);
+insert into Category_Products values('Laptops',10004);
+insert into Category_Products values('Laptops',10005);
+insert into Category_Products values('Digital Cameras',10006);
+insert into Category_Products values('Digital Cameras',10007);
+insert into Category_Products values('Digital Cameras',10008);
+insert into Category_Products values('Digital Cameras',10009);
+insert into Category_Products values('Bicycle',10010);
+insert into Category_Products values('Bicycle',10011);
+insert into Category_Products values('Bicycle',10012);
+insert into Category_Products values('Men Watches',10013);
+insert into Category_Products values('Men Watches',10014);
+insert into Category_Products values('Men Watches',10015);
+insert into Category_Products values('Women Watches',10016);
+insert into Category_Products values('Women Watches',10017);
+insert into Category_Products values('Women Watches',10018);
+insert into Category_Products values('Women Watches',10019);
