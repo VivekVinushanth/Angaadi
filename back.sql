@@ -64,7 +64,6 @@ CREATE TABLE `Product_Variant` (
 );
 
 
-
 CREATE TABLE `Variant_Detail` (
   `SKU` int,
   `Attribute_Name` varchar(255),
@@ -75,19 +74,20 @@ CREATE TABLE `Variant_Detail` (
 
 
 CREATE TABLE `Category` (
+  `pid` int NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255),
   `sub_category_name` varchar(255),
-  PRIMARY KEY (`category_name`,`sub_category_name`)
+  PRIMARY KEY (`pid`)
 );
 
 
 
 
 CREATE TABLE `Category_Products` (
-  `sub_category_name` varchar(255),
+  `pid` varchar(255),
   `product_ID`int,
-  PRIMARY KEY  (`sub_category_name`, `product_ID`),
-  Foreign KEY (`sub_category_name`) references `Category` (`sub_category_name`) ,
+  PRIMARY KEY  (`pid`, `product_ID`),
+  Foreign KEY (`pid`) references `Category` (`pid`) ,
   Foreign KEY (`product_ID`) references `Product`(`product_ID`)
 );
 
