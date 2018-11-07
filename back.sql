@@ -1,3 +1,7 @@
+
+CREATE database if not exists angaadi ;
+use angaadi;
+
 CREATE TABLE `Customer` (
   `customer_ID` int NOT NULL AUTO_INCREMENT,
   `Email_ID` varchar(255),
@@ -62,7 +66,7 @@ CREATE TABLE `Variant_Detail` (
   `SKU` int,
   `Attribute_Name` varchar(255),
   `Attribute_Value` varchar(255),
-  Primary KEY(`SKU`)
+  Primary KEY(`SKU`),
   Foreign KEY (`SKU`) references `Product_Variant`(`SKU`)
 );
 
