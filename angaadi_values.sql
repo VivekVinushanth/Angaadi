@@ -38,6 +38,15 @@ insert into Product values(10015,'shshd Business Skeleton Watch','shshd');
 insert into Product values(10016,'contena 2018 Women Watches Romantic Stainless Steel','contena');
 insert into Product values(10017,'PAUL VALENTINE Luxury Quartz Wrist watch','PAUL VALENTINE');
 insert into Product values(10018,'Daniel Sabrina 2018 Women Quartz  wrist Watch men Style','Daniel Sabrina');
+
+
+insert into Product_Variant values(20000,10000,2000,10,20000.00,0.30,);
+insert into Product_Variant values(20001,10000,2001,22,30000.00,0.30,);
+insert into Product_Variant values(20002,10000,2001,6,40000.00,0.30,);
+insert into Product_Variant values(20003,10001,20002,1,20000.00,0.30,);
+insert into Product_Variant values(20004,10002,2003,4,20000.00,5.00,);
+insert into Product_Variant values(20005,10003,2003,6,20000.00,6.00,);
+insert into Product_Variant values(20006,10003,2004,10,20000.00,4.50,);
 insert into Product values(10019,'OTOKY 2018 Dress Watches Faux Chronograph Quartz Casual','OTOKY');
 
 
