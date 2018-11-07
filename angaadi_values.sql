@@ -50,11 +50,10 @@ insert into Category_Products values('Women Watches',10017);
 insert into Category_Products values('Women Watches',10018);
 insert into Category_Products values('Women Watches',10019);
 
+insert into Product_Variant values(20000,10000,2000,10,20000.00,0.30,'https://goo.gl/images/S5mZgE');
 
-insert into Product_Variant values(20000,10000,2000,10,20000.00,0.30,);
-insert into Product_Variant values(20001,10000,2001,22,30000.00,0.30,);
-insert into Product_Variant values(20002,10000,2001,6,40000.00,0.30,);
-insert into Product_Variant values(20003,10001,20002,1,20000.00,0.30,);
-insert into Product_Variant values(20004,10002,2003,4,20000.00,5.00,);
-insert into Product_Variant values(20005,10003,2003,6,20000.00,6.00,);
-insert into Product_Variant values(20006,10003,2004,10,20000.00,4.50,);
+
+insert into Variant_Detail values (20000,'memory','64GB');
+insert into Variant_Detail values (20000,'memory','128GB');
+insert into Variant_Detail values (20000,'colour','black');
+insert into Variant_Detail values (20000,'colour','grey');
