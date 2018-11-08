@@ -68,7 +68,7 @@ CREATE TABLE Variant_Detail (
   SKU int,
   Attribute_Name varchar(255),
   Attribute_Value varchar(255),
-  Primary KEY  (SKU,Attribute_Name,Attribute_Value),
+  Primary KEY  (SKU,Attribute_Name),
   Foreign KEY (SKU) references Product_Variant(SKU)
 );
 
