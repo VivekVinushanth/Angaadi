@@ -148,7 +148,7 @@ customer_ID int,
 
 CREATE TABLE Customer_Telephone (
   customer_ID int,
-  telephone int,
+  telephone varchar(10),
   PRIMARY KEY (customer_ID,telephone),
    FOREIGN KEY (customer_ID) references Customer(customer_ID)
 );
