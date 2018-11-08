@@ -1,3 +1,16 @@
+drop database if exists angaadi_users;
+CREATE database angaadi_users ;
+use angaadi_users;
+
+CREATE TABLE user(
+username int,
+password varchar(255) not null,
+image blob,
+primary key (username)
+);
+
+insert into user values(1,'27b54f30a9b06e0088912dc786dc3545')
+
 drop database if exists angaadi;
 CREATE database angaadi ;
 use angaadi;
