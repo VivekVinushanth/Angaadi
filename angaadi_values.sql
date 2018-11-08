@@ -1,3 +1,4 @@
+
 insert into customer(customer_ID) values (1);
 
 insert into Product values(10000,'xiaomi Redmi Note 5','Xiaomi');
@@ -52,7 +53,7 @@ insert into Category_Products values(7,10017);
 insert into Category_Products values(7,10018);
 insert into Category_Products values(7,10019);
 
-insert into Product_Variant values(20000,10000,2000,10,20000.00,0.30,'https://goo.gl/images/S5mZgE');
+insert into Product_Variant values(20000,10000,10,20000.00,0.30,'https://goo.gl/images/S5mZgE');
 
 
 insert into Variant_Detail values (20000,'memory','64GB');
