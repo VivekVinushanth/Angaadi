@@ -20,35 +20,35 @@ insert into Product values(10018,'Daniel Sabrina 2018 Women Quartz  wrist Watch 
 insert into Product values(10019,'OTOKY 2018 Dress Watches Faux Chronograph Quartz Casual','OTOKY');
 
 
-insert into Category values('Cellphones & Telecommunications','Mobile Phones');
-insert into Category values('Computer & Office','Gaming Laptops');
-insert into Category values('Computer & Office','Laptops');
-insert into Category values('Consumer Electronics','Digital Cameras');
-insert into Category values('Sports & Entertainment','Bicycle');
-insert into Category values('Watches','Men Watches');
-insert into Category values('Watches','Women Watches');
+insert into Category values(1,'Cellphones & Telecommunications','Mobile Phones');
+insert into Category values(2,'Computer & Office','Gaming Laptops');
+insert into Category values(3,'Computer & Office','Laptops');
+insert into Category values(4,'Consumer Electronics','Digital Cameras');
+insert into Category values(5,'Sports & Entertainment','Bicycle');
+insert into Category values(6,'Watches','Men Watches');
+insert into Category values(7,'Watches','Women Watches');
 
 
-insert into Category_Products values('Mobile Phones',10000);
-insert into Category_Products values('Mobile Phones',10001);
-insert into Category_Products values('Gaming Laptops',10002);
-insert into Category_Products values('Gaming Laptops',10003);
-insert into Category_Products values('Laptops',10004);
-insert into Category_Products values('Laptops',10005);
-insert into Category_Products values('Digital Cameras',10006);
-insert into Category_Products values('Digital Cameras',10007);
-insert into Category_Products values('Digital Cameras',10008);
-insert into Category_Products values('Digital Cameras',10009);
-insert into Category_Products values('Bicycle',10010);
-insert into Category_Products values('Bicycle',10011);
-insert into Category_Products values('Bicycle',10012);
-insert into Category_Products values('Men Watches',10013);
-insert into Category_Products values('Men Watches',10014);
-insert into Category_Products values('Men Watches',10015);
-insert into Category_Products values('Women Watches',10016);
-insert into Category_Products values('Women Watches',10017);
-insert into Category_Products values('Women Watches',10018);
-insert into Category_Products values('Women Watches',10019);
+insert into Category_Products values(1,10000);
+insert into Category_Products values(1,10001);
+insert into Category_Products values(2,10002);
+insert into Category_Products values(2,10003);
+insert into Category_Products values(3,10004);
+insert into Category_Products values(3,10005);
+insert into Category_Products values(4,10006);
+insert into Category_Products values(4,10007);
+insert into Category_Products values(4,10008);
+insert into Category_Products values(4,10009);
+insert into Category_Products values(5,10010);
+insert into Category_Products values(5,10011);
+insert into Category_Products values(5,10012);
+insert into Category_Products values(6,10013);
+insert into Category_Products values(6,10014);
+insert into Category_Products values(6,10015);
+insert into Category_Products values(7,10016);
+insert into Category_Products values(7,10017);
+insert into Category_Products values(7,10018);
+insert into Category_Products values(7,10019);
 
 insert into Product_Variant values(20000,10000,2000,10,20000.00,0.30,'https://goo.gl/images/S5mZgE');
 
