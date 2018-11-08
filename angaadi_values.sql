@@ -1,3 +1,5 @@
+
+
 insert into Product values(10000,'xiaomi Redmi Note 5','Xiaomi');
 insert into Product values(10001,'xiaomi Redmi S2','Xiaomi');
 insert into Product values(10002,'ASUS FX63VD Notebook','ASUS');
