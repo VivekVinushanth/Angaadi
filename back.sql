@@ -111,7 +111,7 @@ CREATE TABLE Cart (
   Quantity int,
   SKU int,
   customer_ID int,
-  Primary KEY (customer_ID),
+  Primary KEY (customer_ID,SKU),
   Foreign KEY(SKU) references Product_Variant(SKU),
   Foreign KEY (customer_ID) references Customer(customer_ID)
 );
