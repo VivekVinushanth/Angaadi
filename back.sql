@@ -68,7 +68,7 @@ CREATE TABLE Variant_Detail (
   SKU int,
   Attribute_Name varchar(255),
   Attribute_Value varchar(255),
-  Primary KEY  (SKU),
+  Primary KEY  (SKU,Attribute_Name),
   Foreign KEY (SKU) references Product_Variant(SKU)
 );
 
@@ -111,8 +111,6 @@ CREATE TABLE Freight_Details (
   PRIMARY KEY (Tracking_ID),
   Foreign KEY (order_ID) references Orders(order_ID)
 );
-
-
 
 
 CREATE TABLE Order_Detail(
