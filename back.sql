@@ -67,7 +67,6 @@ CREATE TABLE Product (
 CREATE TABLE Product_Variant (
   SKU int,
   product_ID int,
-  order_ID int,
   Stock int,
   unit_Price numeric(9,2),
   weight numeric(5,2),
