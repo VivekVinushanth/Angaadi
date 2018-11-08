@@ -9,7 +9,7 @@ image blob,
 primary key (username)
 );
 
-insert into users values(1,'27b54f30a9b06e0088912dc786dc3545');
+insert into users values(1,'27b54f30a9b06e0088912dc786dc3545',null);
 
 drop database if exists angaadi;
 CREATE database angaadi ;
