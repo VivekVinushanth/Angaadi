@@ -54,6 +54,5 @@ insert into Product_Variant values(20000,10000,2000,10,20000.00,0.30,'https://go
 
 
 insert into Variant_Detail values (20000,'memory','64GB');
-insert into Variant_Detail values (20000,'memory','128GB');
 insert into Variant_Detail values (20000,'colour','black');
-insert into Variant_Detail values (20000,'colour','grey');
+
