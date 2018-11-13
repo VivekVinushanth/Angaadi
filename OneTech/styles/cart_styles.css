@@ -716,32 +716,7 @@ section
 {
 	color: #0e8ce4;
 }
-select
-{
-	display: inline;
-	border: 0;
-	width: auto;
-	margin-left: 10px;
-	outline: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	border-bottom: 2px solid #555;
-	color: #7b00ff;
-	-webkit-transition: all .4s ease-in-out;
-	transition: all .4s ease-in-out;
-}
-select:hover
-{
-	cursor: pointer;
-}
-select option
-{
-	border: 0;
-	border-bottom: 1px solid #555;
-	padding: 10px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-}
+
 .header_search_button
 {
 	position: absolute;
