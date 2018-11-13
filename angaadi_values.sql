@@ -23,11 +23,11 @@ insert into Product values(10018,'Daniel Sabrina 2018 Women Quartz  wrist Watch 
 insert into Product values(10019,'OTOKY 2018 Dress Watches Faux Chronograph Quartz Casual','OTOKY');
 
 
-insert into Category values(1,'Cellphones & Telecommunications','Mobile Phones');
-insert into Category values(2,'Computer & Office','Gaming Laptops');
-insert into Category values(3,'Computer & Office','Laptops');
+insert into Category values(1,'Cell and Telecom','Mobile Phones');
+insert into Category values(2,'Computer and Office','Gaming Laptops');
+insert into Category values(3,'Computer and Office','Laptops');
 insert into Category values(4,'Consumer Electronics','Digital Cameras');
-insert into Category values(5,'Sports & Entertainment','Bicycle');
+insert into Category values(5,'Sports and Entert','Bicycle');
 insert into Category values(6,'Watches','Men Watches');
 insert into Category values(7,'Watches','Women Watches');
 
