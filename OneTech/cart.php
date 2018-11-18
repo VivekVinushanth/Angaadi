@@ -1,8 +1,7 @@
 <?php
 require_once 'header.php';
 $query = "SELECT * FROM Cart NATURAL JOIN Product_Variant NATURAL JOIN Product WHERE customer_ID='$customer_ID'";
-$items = mysqli_query($conn, $query);//||exit();\
-header('location: checkout.php');
+$items = mysqli_query($conn, $query);//||exit();
 ?>
 	<div class="cart_section">
 		<div class="container">
@@ -11,7 +10,7 @@ header('location: checkout.php');
 				$cart_query="SELECT * FROM Cart NATURAL JOIN Product_Variant NATURAL JOIN Product WHERE customer_ID='$customer_ID'";
 				$cart_result =  mysqli_query($conn, $cart_query);
 				$date = date('Y-m-d H:i:s');
-				$delivery_method = 1;
+				$delivery_method = 'Home Delivery';
 				$order_total= mysqli_fetch_row(mysqli_query($conn, "SELECT SUM(`unit_price`*`Quantity`) as sum FROM Cart NATURAL JOIN Product_Variant WHERE customer_ID='$customer_ID' limit 1"))[0];
 				mysqli_autocommit($conn, FALSE);
 				$query ="INSERT INTO orders (Total_Price,Order_date,Delivery_Method,customer_ID) VALUES ('$order_total', '$date','$delivery_method','$customer_ID'); SELECT @order_ID:=LAST_INSERT_ID() FROM orders; ";
@@ -29,7 +28,7 @@ header('location: checkout.php');
 				@mysqli_multi_query($conn, $query);
 				if(!mysqli_commit($conn)){
 					echo 'Order Created Successfully!';
-					header('location: checkout.php');
+					echo'<meta http-equiv="refresh" content="0;url=checkout.php">';
 				}
 				else{
 					echo 'Something went Wrong! Try again Later!';

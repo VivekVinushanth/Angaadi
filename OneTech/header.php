@@ -1,10 +1,17 @@
 <?php
-	$cart_page = "cart.php";
+	if(isset($_GET['signout'])&&$_GET['signout']=='true'){
+		setcookie("guest", "", time() - 3600);
+		setcookie("user", "", time() - 3600);
+		setcookie("pass", "", time() - 3600);
+		echo '<meta http-equiv="refresh" content="0;url=index.php">';
+	}
 	$customer_ID = isset($_COOKIE['guest'])?$_COOKIE['guest']:null || isset($_COOKIE['user'])?$_COOKIE['user']:null;
 	if(!(isset($_COOKIE['guest'])||isset($_COOKIE['user'])&&isset($_COOKIE['pass']))){
+		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 		exit();
 	}
 	$conn = mysqli_connect("localhost", "root", "", "angaadi");
+	$cart_page = "cart.php";
 ?>
 <html lang="en">
 <head>
@@ -35,13 +42,14 @@
 				<div class="row">
 					<div class="col d-flex flex-row">
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+94 110000000</div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:angaadi@gmail.com">angaadi@gmail.com</a></div>
+						<div class="top_bar_contact_item">
+							<div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:angaadi@gmail.com">angaadi@gmail.com</a></div>
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_menu">
 					
 							</div>
 							<div class="top_bar_user">
-
+								<b><a href='?signout=true'>Sign Out</a></b>
 							</div>
 						</div>
 					</div>

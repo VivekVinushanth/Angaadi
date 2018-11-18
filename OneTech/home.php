@@ -1,4 +1,10 @@
 <?php
+if(isset($_GET['signout'])&&$_GET['signout']=='true'){
+	setcookie("guest", "", time() - 3600);
+	setcookie("user", "", time() - 3600);
+	setcookie("pass", "", time() - 3600);
+	echo '<meta http-equiv="refresh" content="0;url=index.php">';
+}
 require_once 'control.php';
 if(!(isset($_COOKIE['guest'])||isset($_COOKIE['user'])&&isset($_COOKIE['pass']))){
 	header("Location: index.php");
@@ -32,26 +38,29 @@ $conn = mysqli_connect("localhost", "root", "", "angaadi");
 	
 	<header class="header">
 
+
 		<!-- Top Bar -->
 
 		<div class="top_bar">
 			<div class="container">
 				<div class="row">
 					<div class="col d-flex flex-row">
-								<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+94 110000000</div>
-						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:angaadi@gmail.com">angaadi@gmail.com</a></div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+94 110000000</div>
+						<div class="top_bar_contact_item">
+							<div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:angaadi@gmail.com">angaadi@gmail.com</a></div>
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_menu">
 					
 							</div>
 							<div class="top_bar_user">
-
+								<b><a href='?signout=true'>Sign Out</a></b>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>		
 		</div>
+
 
 		<!-- Header Main -->
 
@@ -65,27 +74,26 @@ $conn = mysqli_connect("localhost", "root", "", "angaadi");
 							<div class="logo"><a href="index.php">OneTech</a></div>
 						</div>
 					</div>
-
 					<!-- Search -->
 					<div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
 						<div class="header_search">
 							<div class="header_search_content">
 								<div class="header_search_form_container">
-									<form action="#" class="header_search_form clearfix">
-										<input type="search" required="required" class="header_search_input" placeholder="Search for products...">
+									<form action="products.php" class="header_search_form clearfix">
+										<input type="search" name='search' required="required" class="header_search_input" placeholder="Search for products...">
 										<div class="custom_dropdown">
 											<div class="custom_dropdown_list">
 												<span class="custom_dropdown_placeholder clc">All Categories</span>
 												<i class="fas fa-chevron-down"></i>
 												<ul class="custom_list clc">
-													<li><a class="clc" href="#">All Categories</a></li>
+													<li><a class="clc" href="products.php?category=All Categories">All Categories</a></li>
 													<?php
 														$result = mysqli_query($conn,"SELECT DISTINCT `category_name` FROM `category`");
 														while($row = mysqli_fetch_row($result)){
 															$cat=$row[0];
-															echo "<li><a class='clc' href='#'>$cat</a></li>";
+															echo "<li><a href='products.php?category=$cat' class='clc' >$cat</a></li>";
 														}
-														?>
+													?>
 												</ul>
 											</div>
 										</div>
@@ -95,7 +103,7 @@ $conn = mysqli_connect("localhost", "root", "", "angaadi");
 							</div>
 						</div>
 					</div>
-
+					
 					<!-- Wishlist -->
 					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">

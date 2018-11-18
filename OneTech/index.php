@@ -26,8 +26,6 @@ else{
 		exit();
 	}
 }
-
-
 ?>
 <html lang="en">
 <head>
