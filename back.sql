@@ -43,7 +43,6 @@ CREATE TABLE Shipping_Address (
   City varchar(255),
   Zip_Code varchar(255),
   Address_Line1 varchar(255),
-  Address_Line2 varchar(255),
   Primary KEY (order_ID),
   Foreign KEY (order_ID) references Orders(order_ID)
 );
