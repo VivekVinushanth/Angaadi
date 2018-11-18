@@ -41,8 +41,9 @@ CREATE TABLE Shipping_Address (
   LastName varchar(255),
   order_ID int,
   City varchar(255),
+  State varchar(255),
   Zip_Code varchar(255),
-  Address_Line1 varchar(255),
+  Address_Line varchar(255),
   Primary KEY (order_ID),
   Foreign KEY (order_ID) references Orders(order_ID)
 );
