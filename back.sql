@@ -37,6 +37,8 @@ CREATE TABLE Orders (
 );
 
 CREATE TABLE Shipping_Address (
+  FirstName varchar(255),
+  LastName varchar(255),
   order_ID int,
   City varchar(255),
   Zip_Code varchar(255),
