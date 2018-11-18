@@ -27,7 +27,7 @@ CREATE TABLE Customer (
 );
 
 CREATE TABLE Orders (
-  order_ID int,
+  order_ID int NOT NULL AUTO_INCREMENT,
   Total_Price numeric(9,2),
   Order_date datetime,
   Delivery_Method enum("Home Delivery","Store Pickup"),
@@ -50,7 +50,7 @@ CREATE TABLE Shipping_Address (
 );
 
 CREATE TABLE Payment (
-  Payment_ID int,
+  Payment_ID int NOT NULL AUTO_INCREMENT,
   order_Id int,
   Payment_method enum("pay by card","pay on delivery"),
   Payment_Date datetime,
