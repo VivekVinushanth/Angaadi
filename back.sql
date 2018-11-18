@@ -27,7 +27,7 @@ CREATE TABLE Customer (
 );
 
 CREATE TABLE Orders (
-  order_ID int,
+  order_ID int NOT NULL AUTO_INCREMENT,
   Total_Price numeric(9,2),
   Order_date datetime,
   Delivery_Method enum("Home Delivery","Store Pickup"),
@@ -37,17 +37,20 @@ CREATE TABLE Orders (
 );
 
 CREATE TABLE Shipping_Address (
+  FirstName varchar(255),
+  LastName varchar(255),
   order_ID int,
   City varchar(255),
+  State varchar(255),
   Zip_Code varchar(255),
-  Address_Line1 varchar(255),
-  Address_Line2 varchar(255),
+  Address_Line varchar(255),
+  PhoneNumber INT(15),
   Primary KEY (order_ID),
   Foreign KEY (order_ID) references Orders(order_ID)
 );
 
 CREATE TABLE Payment (
-  Payment_ID int,
+  Payment_ID int NOT NULL AUTO_INCREMENT,
   order_Id int,
   Payment_method enum("pay by card","pay on delivery"),
   Payment_Date datetime,
