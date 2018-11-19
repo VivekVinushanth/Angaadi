@@ -1636,3 +1636,15 @@ section
 {
 	margin-right: 0px;
 }
+table[class=universal_table]{
+	margin:30px;
+	padding:7px;
+}
+th, tr[class=universal_table]{
+	padding:4px 10px 4px 10px;
+
+}
+td[class=universal_table]{
+	padding:4px 15px 4px 10px;
+	text-align:right;
+}

@@ -53,6 +53,9 @@ $conn = mysqli_connect("localhost", "root", "", "angaadi");
 					
 							</div>
 							<div class="top_bar_user">
+								<b><a href='orders.php'>Orders</a></b>
+							</div>
+							<div class="top_bar_user">
 								<b><a href='?signout=true'>Sign Out</a></b>
 							</div>
 						</div>
