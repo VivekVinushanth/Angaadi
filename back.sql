@@ -34,6 +34,8 @@ CREATE TABLE Orders (
   customer_ID int,
   PRIMARY KEY (order_ID),
   Foreign KEY (customer_ID) references Customer(customer_ID)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
 );
 
 CREATE TABLE Shipping_Address (
@@ -47,6 +49,8 @@ CREATE TABLE Shipping_Address (
   PhoneNumber INT(15),
   Primary KEY (order_ID),
   Foreign KEY (order_ID) references Orders(order_ID)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
 );
 
 CREATE TABLE Payment (
@@ -57,6 +61,8 @@ CREATE TABLE Payment (
   Payment_status enum("paid","Not Paid"),
   PRIMARY KEY (Payment_ID),
   Foreign KEY (order_ID) references Orders(order_ID)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
 );
 
 CREATE TABLE Product (
@@ -76,6 +82,8 @@ CREATE TABLE Product_Variant (
    Image blob,
   PRIMARY KEY (SKU),
    Foreign KEY (product_ID) references Product(product_ID)
+  ON DELETE CASCADE
+   ON UPDATE CASCADE
 );
 
 
@@ -104,6 +112,8 @@ CREATE TABLE Category_Products (
   PRIMARY KEY  (pid, product_ID),
   Foreign KEY (pid) references Category(pid) ,
   Foreign KEY (product_ID) references Product(product_ID)
+  ON DELETE CASCADE
+   ON UPDATE CASCADE
 );
 
 
@@ -114,8 +124,12 @@ CREATE TABLE Cart (
   SKU int,
   customer_ID int,
   Primary KEY (customer_ID,SKU),
-  Foreign KEY(SKU) references Product_Variant(SKU),
+  Foreign KEY(SKU) references Product_Variant(SKU)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE,
   Foreign KEY (customer_ID) references Customer(customer_ID)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
 );
 
 CREATE TABLE Freight_Details (
@@ -125,6 +139,8 @@ CREATE TABLE Freight_Details (
   Shipping_date datetime,
   PRIMARY KEY (Tracking_ID),
   Foreign KEY (order_ID) references Orders(order_ID)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
 );
 
 
@@ -134,6 +150,8 @@ CREATE TABLE Order_Detail(
   Quantity int,
   Primary KEY  (SKU, order_id),
   Foreign KEY (SKU) references Product_Variant(SKU)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
 );
 
 CREATE TABLE Guest (
@@ -154,4 +172,6 @@ CREATE TABLE Customer_Telephone (
   telephone varchar(10),
   PRIMARY KEY (customer_ID,telephone),
    FOREIGN KEY (customer_ID) references Customer(customer_ID)
+  ON DELETE CASCADE
+   ON UPDATE CASCADE
 );
