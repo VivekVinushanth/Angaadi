@@ -26,7 +26,7 @@ if(isset($_POST['phone'])){
 									."VALUES('$order_ID','$payment_method','$date', '$payment_status');";
 	$result1	= mysqli_query($conn, $query1);
 	$payment_ID= mysqli_fetch_assoc(mysqli_query($conn, "SELECT LAST_INSERT_ID() AS 'pid' FROM payment;"))['pid'];
-	if(!$result){
+	if(!$result1){
 		if(mysqli_query($conn, "Select * from shipping_address where order_ID='$$order_ID'")){
 			$payment_ID= mysqli_fetch_assoc(mysqli_query($conn, "SELECT Payment_ID AS 'pid' FROM payment WHERE order_ID='$order_ID';"))['pid'];
 			echo "Order Already Confirmed!</br><a href='paymentconfirmed.php?order_ID=$order_ID&payment_ID=$payment_ID'>To pay the order >>></a>";}

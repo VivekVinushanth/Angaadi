@@ -8,8 +8,7 @@ username varchar(255)not null,
 password varchar(255) not null,
 image blob,
 unique(username),
-primary key (username,customer_ID),
-foreign key (customer_ID) references Customer(customer_ID)
+primary key (username,customer_ID)
 );
 
 insert into users values('user','27b54f30a9b06e0088912dc786dc3545',null);

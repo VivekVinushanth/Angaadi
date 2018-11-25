@@ -148,20 +148,20 @@ $conn = mysqli_connect("localhost", "root", "", "angaadi");
 
 								<ul class="cat_menu">
 									<?php
-									$result = mysqli_query($conn,"SELECT DISTINCT `category_name` FROM `category`");
+									$result = mysqli_query($conn,"SELECT DISTINCT category_name FROM category");
 									while($row = mysqli_fetch_row($result)){
 										$cat=$row[0];
-										echo "<li class='hassubs'>
-											<a href='#'>$cat<i class='fas fa-chevron-right'></i></a>
-											<ul>";
+										echo "<li class='hassubs'>"
+											."<a href='products.php?category=$cat'>$cat<i class='fas fa-chevron-right'></i></a>"
+											."<ul>";
 												$subresult = mysqli_query($conn,"SELECT `sub_category_name` FROM `category` WHERE `category_name`='$cat'");
 												while($subrow = mysqli_fetch_row($subresult)){
 													$subcat = $subrow[0];
-													echo "<li><a href='#'>$subcat<i class='fas fa-chevron-right'></i></a></li>";
+													echo "<li><a href='products.php?subcategory=$subcat'>$subcat<i class='fas fa-chevron-right'></i></a></li>";
 												}
-											echo"</ul></li>";
+										echo"</ul></li>";
 									}
-									?>
+								?>
 								</ul>
 							</div>
 
