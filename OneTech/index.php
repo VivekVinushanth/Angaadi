@@ -10,7 +10,13 @@ if(isset($_POST['username'])&&isset($_POST['password'])){
 		if($result1==1){
 			setcookie("user", $username, time()+345600);
 			setcookie("pass", $password, time()+345600);
-			header("Location: home.php");
+			if($username=='admin'){
+				header("Location: adminhome.php");
+			}
+			else{
+				header("Location: home.php");
+			}
+			
 		}
 		else{
 			echo "Incorrect password, Try again!";
@@ -22,7 +28,12 @@ if(isset($_POST['username'])&&isset($_POST['password'])){
 }
 else{
 	if((isset($_COOKIE['guest'])||(isset($_COOKIE['user'])&&isset($_COOKIE['pass'])))){
-		header("Location: home.php");
+		if($_COOKIE['user']=='admin'){
+			header("Location: adminhome.php");
+		}
+		else{
+			header("Location: home.php");
+		}
 		exit();
 	}
 }
