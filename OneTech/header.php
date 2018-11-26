@@ -3,9 +3,11 @@
 		setcookie("guest", "", time() - 3600);
 		setcookie("user", "", time() - 3600);
 		setcookie("pass", "", time() - 3600);
+		setcookie("customer", "", time() - 3600);
+		
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 	}
-	$customer_ID = isset($_COOKIE['guest'])?$_COOKIE['guest']:null || isset($_COOKIE['user'])?$_COOKIE['user']:null;
+	$customer_ID = isset($_COOKIE['guest'])?$_COOKIE['guest']:null || isset($_COOKIE['customer'])?$_COOKIE['customer']:null;
 	if(!(isset($_COOKIE['guest'])||isset($_COOKIE['user'])&&isset($_COOKIE['pass']))){
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 		exit();

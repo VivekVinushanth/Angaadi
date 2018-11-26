@@ -95,19 +95,13 @@
 			</div>
 		</nav>
 	</header>
-	<div class='container' style='padding-left:100px;'>
+<div class='container2'>
 	
 	
 <!--==============================================================================================================================-->
 <?php
 $query="SELECT category.category_name,count(order_detail.Quantity) as counts from category natural join category_products NATURAL join product_variant NATURAL join order_detail group by category.pid;"; //********Change Query Here*********
 $result = mysqli_query($conn, $query);
-$query0="Select DISTINCT order_ID from orders NATURAL JOIN payment where customer_ID = '$customer_ID' AND Payment_status='paid';";
-$result0 = mysqli_query($conn, $query0);
-$values = array();
-while($row=mysqli_fetch_row($result0)){
-	$values[] = $row[0];
-}
 if($result){
 	$record = mysqli_fetch_assoc($result);
 	echo '<table class="universal_table"><tr class="universal_table">';

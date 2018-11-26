@@ -3,13 +3,16 @@ if(isset($_POST['username'])&&isset($_POST['password'])){
 	$username = $_POST['username'];
 	$password = MD5($_POST['password']);
 	$conn = mysqli_connect("localhost", "root", "", "angaadi_users");
-	$result = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE username='$username' LIMIT 1;"));
+	$result0 = mysqli_query($conn, "SELECT customer_ID FROM users WHERE username='$username' LIMIT 1;");
+	$result = mysqli_num_rows($result0);
 	$result1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND Password='$password' LIMIT 1;"));
 	if($result==1){
 		
 		if($result1==1){
+			$customer_ID = mysqli_fetch_row($result0)[0];
 			setcookie("user", $username, time()+345600);
 			setcookie("pass", $password, time()+345600);
+			setcookie("customer", $customer_ID, time()+345600);
 			if($username=='admin'){
 				header("Location: adminhome.php");
 			}

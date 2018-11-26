@@ -95,7 +95,7 @@
 			</div>
 		</nav>
 	</header>
-	<div class='container' style='padding-left:100px;'>
+	<div class='container2'>
 		<a href='view1.php'>View 1</a></br>
 		<a href='view2.php'>View 2</a></br>
 		<a href='view3.php'>View 3</a></br>

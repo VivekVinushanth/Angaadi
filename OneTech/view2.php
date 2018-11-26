@@ -95,20 +95,18 @@
 			</div>
 		</nav>
 	</header>
-	<div class='container' style='padding-left:100px;'>
-	
-	
+	</br>
+	<form style='padding-left:100px;' method='get' action='#'>
+		<input type='number' name='year' />
+		<input type='submit' Value='View Report'/>
+	</form>
+<div class='container2'>
 <!--==============================================================================================================================-->
 <?php
-
-$query="SELECT sales_report($year) "; //********Change Query Here*********
+if(isset($_GET['year'])){
+	$year = $_GET['year'];
+	$query="call sales_report($year) "; //********Change Query Here*********
 $result = mysqli_query($conn, $query);
-$query0="Select DISTINCT order_ID from orders NATURAL JOIN payment where customer_ID = '$customer_ID' AND Payment_status='paid';";
-$result0 = mysqli_query($conn, $query0);
-$values = array();
-while($row=mysqli_fetch_row($result0)){
-	$values[] = $row[0];
-}
 if($result){
 	$record = mysqli_fetch_assoc($result);
 	echo '<table class="universal_table"><tr class="universal_table">';
@@ -127,6 +125,8 @@ if($result){
 	}
 	echo '</table>';
 }
+}
+
 ?>
 <!--==============================================================================================================================-->
 

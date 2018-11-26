@@ -132,6 +132,13 @@ h6::selection
 {
 	
 }
+.container2{
+	width:80%;
+	min-height:50%;
+	border: solid 1px #5555ff;
+	margin:20px 100px 30px 100px;
+	padding:20px;
+}
 .form-control
 {
 	color: #db5246;
@@ -1205,7 +1212,6 @@ section
 /*********************************
 4. Cart
 *********************************/
-
 .cart_section
 {
 	width: 100%;

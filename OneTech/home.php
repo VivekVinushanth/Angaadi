@@ -3,6 +3,7 @@ if(isset($_GET['signout'])&&$_GET['signout']=='true'){
 	setcookie("guest", "", time() - 3600);
 	setcookie("user", "", time() - 3600);
 	setcookie("pass", "", time() - 3600);
+	setcookie("customer", "", time() - 3600);
 	echo '<meta http-equiv="refresh" content="0;url=index.php">';
 }
 require_once 'control.php';
