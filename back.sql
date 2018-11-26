@@ -11,7 +11,7 @@ unique(username),
 primary key (username,customer_ID)
 );
 
-insert into users values('user','27b54f30a9b06e0088912dc786dc3545',null);
+insert into users values(1,'user','27b54f30a9b06e0088912dc786dc3545',null);
 
 drop database if exists angaadi;
 CREATE database angaadi ;
@@ -54,7 +54,7 @@ CREATE TABLE Shipping_Address (
   Primary KEY (order_ID),
   Foreign KEY (order_ID) references Orders(order_ID)
   ON DELETE CASCADE
-  ON UPDATE CASCADE,
+  ON UPDATE CASCADE
   
 );
 
@@ -141,7 +141,7 @@ CREATE TABLE Cart (
   Foreign KEY (customer_ID) references Customer(customer_ID)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
-  check (Quantity >= 0)
+  check(Quantity > 0 )
 );
 
 CREATE TABLE Freight_Details (
@@ -153,7 +153,7 @@ CREATE TABLE Freight_Details (
   Foreign KEY (order_ID) references Orders(order_ID)
   ON DELETE CASCADE
   ON UPDATE CASCADE,
-  check (Shipping_Status in ("Processing","delivered"))
+  CHECK(Shipping_Status in ("Processing","delivered"))
 );
 
 
@@ -194,7 +194,6 @@ CREATE TABLE Customer_Telephone (
 
 
 
--- =========================================================================
 DROP PROCEDURE IF EXISTS validate_phone;
 DELIMITER $$
 CREATE PROCEDURE validate_phone(
@@ -208,7 +207,7 @@ BEGIN
   END IF;
 END$$
 DELIMITER ;
----------------------------------------------------
+
 
 DROP PROCEDURE IF EXISTS validate_stock;
 DELIMITER $$
@@ -224,8 +223,6 @@ BEGIN
 END$$
 DELIMITER ;
 
--- TRIGGERS
--- ***********************************************************************
 
 DELIMITER $$
 CREATE TRIGGER validate_phone_insert
@@ -242,8 +239,8 @@ BEGIN
 	CALL validate_phone(NEW.telephone);
 END$$
 DELIMITER ;
------------------------------------------------------------------------
 
+DELIMITER $$
 CREATE TRIGGER validate_Stock_insert
 BEFORE INSERT ON Product_Variant FOR EACH ROW
 BEGIN
@@ -252,8 +249,8 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER validate_Stock_insert
-BEFORE UPDATE ON Customer_Telephone FOR EACH ROW
+CREATE TRIGGER validate_Stock_update
+BEFORE UPDATE ON Product_Variant FOR EACH ROW
 BEGIN
 	CALL validate_stock(NEW.Stock);
 END$$
