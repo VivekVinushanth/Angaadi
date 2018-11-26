@@ -100,7 +100,7 @@
 	
 <!--==============================================================================================================================-->
 <?php
-$query="Select * from orders where customer_ID = '$customer_ID'"; //********Change Query Here*********
+$query="select customer.FirstName , orders.order_ID , orders.Order_date, orders.Total_Price from customer natural join orders"; //********Change Query Here*********
 $result = mysqli_query($conn, $query);
 $query0="Select DISTINCT order_ID from orders NATURAL JOIN payment where customer_ID = '$customer_ID' AND Payment_status='paid';";
 $result0 = mysqli_query($conn, $query0);

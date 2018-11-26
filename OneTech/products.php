@@ -54,7 +54,7 @@
 								echo "
 								<li class='cart_item clearfix'>
 									<div class='cart_item_image'>
-									<img alt='$name' src='data:image/png;base64,$image'/></div>
+									<img alt='$name' src='data:image/jpg;base64,$image'/></div>
 									<div class='cart_item_info d-flex flex-md-row flex-column justify-content-between'>
 										<div class='cart_item_name cart_info_col'>
 											<div class='cart_item_title'>Name</div>

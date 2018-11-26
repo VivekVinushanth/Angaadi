@@ -100,7 +100,7 @@
 	
 <!--==============================================================================================================================-->
 <?php
-$query="Select * from orders where customer_ID = '$customer_ID'"; //********Change Query Here*********
+$query="SELECT category.category_name,count(order_detail.Quantity) as counts from category natural join category_products NATURAL join product_variant NATURAL join order_detail group by category.pid;"; //********Change Query Here*********
 $result = mysqli_query($conn, $query);
 $query0="Select DISTINCT order_ID from orders NATURAL JOIN payment where customer_ID = '$customer_ID' AND Payment_status='paid';";
 $result0 = mysqli_query($conn, $query0);
