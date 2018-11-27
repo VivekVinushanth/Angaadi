@@ -11,7 +11,7 @@
 		exit();
 	}
 	require_once 'adminauthentication.php';
-	$conn = mysqli_connect("localhost", "root", "", "angaadi");
+	$conn = mysqli_connect("localhost", "admin", "3333", "angaadi");
 	$cart_page = "cart.php";
 ?>
 <html lang="en">

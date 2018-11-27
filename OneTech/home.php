@@ -11,7 +11,7 @@ if(!(isset($_COOKIE['guest'])||isset($_COOKIE['user'])&&isset($_COOKIE['pass']))
 	header("Location: index.php");
 	exit();
 }
-$conn = mysqli_connect("localhost", "root", "", "angaadi");
+$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
 ?>
 <html lang="en">
 <head>

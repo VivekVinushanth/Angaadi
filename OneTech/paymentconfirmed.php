@@ -1,7 +1,7 @@
 <?php
 require_once 'header.php';
 if(isset($_GET['order_ID'])&&isset($_GET['payment_ID'])){
-	$conn = mysqli_connect("localhost", "root", "", "angaadi");
+	$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
 	$order_ID = $_GET['order_ID'];
 	$payment_ID = $_GET['payment_ID'];
 	$query0 = "Select * FROM payment where payment_ID='$payment_ID'&&Payment_method='pay by card';";

@@ -12,7 +12,7 @@
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 		exit();
 	}
-	$conn = mysqli_connect("localhost", "root", "", "angaadi");
+	$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
 	$cart_page = "cart.php";
 ?>
 <html lang="en">

@@ -9,7 +9,7 @@ if(isset($_POST['phone'])){
 	$zip = $_POST['zip'];
 	$deliverymethod = $_POST['deliverymethod'];
 	$phone = $_POST['phone'];
-	$conn = mysqli_connect("localhost", "root", "", "angaadi");
+	$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
 	$payment_status = 'Not Paid';
 	$payment_method = $_POST['payment_method'];
 	$date = date('Y-m-d H:i:s');

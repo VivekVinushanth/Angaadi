@@ -7,7 +7,7 @@ if(isset($_POST['phone'])){
 		$city = $_POST['city'];
 		$zip = $_POST['zip'];
 		$phone = $_POST['phone'];
-		$conn = mysqli_connect("localhost", "root", "", "angaadi");
+		$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
 	if(isset($_POST['username'])&&isset($_POST['password'])){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
