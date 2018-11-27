@@ -289,3 +289,15 @@ group by order_detail.SKU
 order by SUM(order_detail.Quantity) DESC;
 end$$
 DELIMITER ;
+
+
+DELIMITER $$
+CREATE  PROCEDURE product_analytics(product1 varchar(255))
+BEGIN
+SELECT product.product_name,orders.Order_date,order_detail.Quantity
+from product NATURAL JOIN product_variant NATURAL JOIN order_detail NATURAL JOIN  orders
+where product.product_name=product1
+order BY order_detail.Quantity DESC;
+
+end$$
+DELIMITER ;
