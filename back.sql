@@ -258,7 +258,7 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE DEFINER=`` PROCEDURE `sales_report`(IN `period` INT)
+CREATE PROCEDURE `sales_report`(`period` INT)
 BEGIN
 SELECT orders.order_ID,orders.Order_date,customer.FirstName ,orders.Total_Price ,orders.Delivery_Method , payment.Payment_status ,payment.Payment_method,orders.Total_Price,shipping_address.Address_Line,shipping_address.City,shipping_address.State,freight_details.Shipping_Status
 FROM orders natural join customer natural left outer join shipping_address NATURAL left outer JOIN freight_details Natural left outer JOIN payment where year(orders.Order_date)=period;
