@@ -29,7 +29,7 @@ CREATE TABLE Customer (
 );
 
 CREATE TABLE Orders (
-  order_ID int NOT NULL AUTO_INCREMENT,
+  order_id int NOT NULL AUTO_INCREMENT,
   Total_Price numeric(9,2) NOT NULL,
   Order_date datetime NOT NULL ,
   Delivery_Method enum("Home Delivery","Store Pickup"),
