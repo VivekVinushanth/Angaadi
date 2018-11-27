@@ -265,3 +265,27 @@ FROM orders natural join customer natural left outer join shipping_address NATUR
 
 end$$
 DELIMITER ;
+
+
+DELIMITER $$
+CREATE  PROCEDURE desired_product(period1 INT, period2 INT)
+BEGIN
+SELECT product.product_name,SUM(order_detail.Quantity) as amount_sold
+from  order_detail NATURAL JOIN  orders NATURAL JOIN product_variant NATURAL JOIN product
+where year(orders.Order_date ) between period1 and period2
+group by order_detail.SKU
+order by SUM(order_detail.Quantity) DESC;
+end$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE  PROCEDURE desired_product(period1 INT, period2 INT)
+BEGIN
+SELECT product.product_name,SUM(order_detail.Quantity) as amount_sold
+from  order_detail NATURAL JOIN  orders NATURAL JOIN product_variant NATURAL JOIN product
+where year(orders.Order_date ) between period1 and period2
+group by order_detail.SKU
+order by SUM(order_detail.Quantity) DESC;
+end$$
+DELIMITER ;
