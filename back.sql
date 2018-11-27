@@ -191,7 +191,9 @@ CREATE TABLE Customer_Telephone (
 );
 
 
-
+create table main_city(
+    mcity varchar(255) not null
+);
 
 
 DROP PROCEDURE IF EXISTS validate_phone;
