@@ -7,10 +7,12 @@
 		
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 	}
-	$customer_ID = isset($_COOKIE['guest'])?$_COOKIE['guest']:null || isset($_COOKIE['customer'])?$_COOKIE['customer']:null;
-	if(!(isset($_COOKIE['guest'])||isset($_COOKIE['user'])&&isset($_COOKIE['pass']))){
+	if(!(isset($_COOKIE['customer'])||isset($_COOKIE['user'])&&isset($_COOKIE['pass']))){
 		echo '<meta http-equiv="refresh" content="0;url=index.php">';
 		exit();
+	}
+	else{
+		$customer_ID = $_COOKIE['customer'];
 	}
 	$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
 	$conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
@@ -50,6 +52,9 @@
 						<div class="top_bar_content ml-auto">
 							<div class="top_bar_menu">
 					
+							</div>
+							<div class="top_bar_user">
+								<b>User: <?php $temp = isset($_COOKIE['user'])?$_COOKIE['user']: $customer_ID; echo $temp;?></b>
 							</div>
 							<div class="top_bar_user">
 								<b><a href='orders.php'>Orders</a></b>

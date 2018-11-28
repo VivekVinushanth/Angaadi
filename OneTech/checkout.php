@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
 		}
 	}
 	else{
-		echo'<meta http-equiv="refresh" content="0;url=paymentconfirmed.php?order_ID=$order_ID&payment_ID='.$payment_ID.'&city='.$city.'">';
+		echo'<meta http-equiv="refresh" content="0;url=paymentconfirmed.php?order_ID='.$order_ID.'&payment_ID='.$payment_ID.'&city='.$city.'">';
 	}
 }
 

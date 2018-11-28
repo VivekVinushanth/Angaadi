@@ -6,10 +6,12 @@ if(isset($_GET['signout'])&&$_GET['signout']=='true'){
 	setcookie("customer", "", time() - 3600);
 	echo '<meta http-equiv="refresh" content="0;url=index.php">';
 }
-require_once 'control.php';
-if(!(isset($_COOKIE['guest'])||isset($_COOKIE['user'])&&isset($_COOKIE['pass']))){
+if(!(isset($_COOKIE['customer'])||isset($_COOKIE['user'])&&isset($_COOKIE['pass']))){
 	header("Location: index.php");
 	exit();
+}
+else{
+	$customer_ID = $_COOKIE['customer'];
 }
 $conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
 ?>

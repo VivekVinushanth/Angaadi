@@ -8,7 +8,7 @@ if(isset($_POST['phone'])){
 		$zip = $_POST['zip'];
 		$phone = $_POST['phone'];
 		$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
-	if(isset($_POST['username'])&&isset($_POST['password'])){
+	if(isset($_POST['account'])&&$_POST['account']==true){
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 0, $conn, $username, $password);
@@ -23,7 +23,7 @@ function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$c
 		$query = "INSERT INTO Guest (FirstName, LastName, Email_ID, Street_name, City)".
 		"VALUES ('$first', '$last', '$email', '$street', '$city')";
 		$result = mysqli_query($conn, $query);
-		$cus_ID = mysqli_query($conn, "SELECT LAST_INSERT_ID();");
+		$cus_ID = mysqli_fetch_row(mysqli_query($conn, "SELECT LAST_INSERT_ID();"))[0];
 	}
 	else{
 		$query = "INSERT INTO Customer (FirstName, LastName, Email_ID, Street_name, City)".
@@ -42,11 +42,12 @@ function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$c
 		if($cus_que){
 			//$query1 = "SELECT LAST_INSERT_ID() FROM Customer LIMIT 1;";
 			//$guest_id = mysqli_query($conn, $query1);
-			setcookie("guest", $cus_ID, time()+345600);
+			setcookie("customer", $cus_ID, time()+345600);
 		}
 		else{
 			setcookie("user", $user, time()+345600);
 			setcookie("pass", $pass, time()+345600);
+			
 			$result0 = mysqli_query($conn, "SELECT customer_ID FROM users WHERE username='$user' LIMIT 1;");
 			$customer_ID = mysqli_fetch_row($result0)[0];
 			setcookie("customer", $customer_ID, time()+345600);
@@ -166,7 +167,7 @@ function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$c
 											</div>
 											<div class="col-12" align="left">
 												<div class="custom-control custom-checkbox d-block mb-2">
-													<input type="checkbox" class="custom-control-input" id="createaccount">
+													<input type="checkbox" class="custom-control-input" name="account" id="createaccount">
 													<label class="custom-control-label" for="createaccount">Create an accout</label>
 												</div>
 											</div>

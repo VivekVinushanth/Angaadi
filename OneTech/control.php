@@ -1,4 +1,6 @@
 <?php
 $cart_page = "cart.php";
-$customer_ID = isset($_COOKIE['guest'])?$_COOKIE['guest']:null || isset($_COOKIE['user'])?$_COOKIE['user']:null;
+if(isset($_COOKIE['guest']))$quest = $_COOKIE['guest'];
+if(isset($_COOKIE['user']))$user = $_COOKIE['user'];
+$customer_ID = $quest?$quest:$user;
 ?>
