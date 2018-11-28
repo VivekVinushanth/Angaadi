@@ -273,7 +273,7 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE  PROCEDURE desired_product(period1 INT, period2 INT)
+CREATE  PROCEDURE desired_product(period1 date, period2 date)
 BEGIN
 SELECT product.product_name,SUM(order_detail.Quantity) as amount_sold
 from  order_detail NATURAL JOIN  orders NATURAL JOIN product_variant NATURAL JOIN product
