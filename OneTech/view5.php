@@ -95,30 +95,42 @@
 			</div>
 		</nav>
 	</header>
+		<h3>Product Analytics Report</h3>
+		</br>
+	<form style='padding-left:100px;' method='get' action='#'>
+		<input type='test' name='product' />
+		<input type='submit' Value='View Report'/>
+	</form>
+
 <div class='container2'>
 	
 	
 <!--==============================================================================================================================-->
 <?php
-$query="Select * from orders where customer_ID = '$customer_ID'"; //********Change Query Here*********
-$result = mysqli_query($conn, $query);
-if($result){
-	$record = mysqli_fetch_assoc($result);
-	echo '<table class="universal_table"><tr class="universal_table">';
-		foreach($record as $key => $data){
-			echo "<th class='universal_table'>$key</th>";
+if(isset($_GET['product'])){
+	$product = strtolower($_GET['product']);
+	$query="call product_analytics('$product')"; //********Change Query Here*********
+	$result = mysqli_query($conn, $query);
+	if($result){
+		$record = mysqli_fetch_assoc($result);
+		if(sizeof($record)!=0){
+			echo '<table class="universal_table"><tr class="universal_table">';
+				foreach($record as $key => $data){
+					echo "<th class='universal_table'>$key</th>";
+				}
+				echo '</tr>';
+			while($record){
+				echo '<tr class="universal_table">';
+				foreach($record as $key => $data){
+					echo "<td class='universal_table' width='auto'>$data</td>";
+				}
+				echo '</tr>';
+				//echo '<td width="auto"><a class="_button" href="profile?client_id='.$customer[1].'">'.$customer[0].'</a></td>';
+				$record = mysqli_fetch_row($result);
+			}
+			echo '</table>';
 		}
-		echo '</tr>';
-	while($record){
-		echo '<tr class="universal_table">';
-		foreach($record as $key => $data){
-			echo "<td class='universal_table' width='auto'>$data</td>";
-		}
-		echo '</tr>';
-		//echo '<td width="auto"><a class="_button" href="profile?client_id='.$customer[1].'">'.$customer[0].'</a></td>';
-		$record = mysqli_fetch_row($result);
 	}
-	echo '</table>';
 }
 ?>
 <!--==============================================================================================================================-->
