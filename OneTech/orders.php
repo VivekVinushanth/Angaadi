@@ -2,7 +2,7 @@
 require_once 'header.php';
 $query="Select * from orders where customer_ID = '$customer_ID'";
 $result = mysqli_query($conn, $query);
-$query0="Select DISTINCT order_ID, Payment_ID from orders NATURAL JOIN payment where customer_ID = '$customer_ID' AND Payment_status='paid';";
+$query0="Select DISTINCT order_id, Payment_ID from orders NATURAL JOIN payment where customer_ID = '$customer_ID' AND Payment_status='paid';";
 $result0 = mysqli_query($conn, $query0);
 $paid_order_IDs = array();
 while($row=mysqli_fetch_row($result0)){
@@ -18,7 +18,7 @@ if($result){
 		}
 		echo '<th class="universal_table">Payment</th><th class="universal_table">Details</th></tr>';
 		while($record){
-			$order_ID = $record['order_ID'];
+			$order_ID = $record['order_id'];
 			echo '<tr class="universal_table">';
 			foreach($record as $key => $data){
 				echo "<td class='universal_table' width='auto'>$data</td>";

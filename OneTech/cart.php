@@ -28,7 +28,7 @@ $items = mysqli_query($conn, $query);//||exit();
 				@mysqli_multi_query($conn, $query);
 				if(!mysqli_commit($conn)){
 					echo 'Order Created Successfully!';
-					//echo'<meta http-equiv="refresh" content="0;url=checkout.php">';
+					echo'<meta http-equiv="refresh" content="0;url=checkout.php">';
 				}
 				else{
 					echo 'Something went Wrong! Try again Later!';
