@@ -85,7 +85,7 @@ CREATE TABLE Product_Variant (
   Stock int ,
   unit_Price numeric(9,2),
   weight numeric(5,2),
-  Image blob,
+  Image longblob,
   PRIMARY KEY (SKU),
    Foreign KEY (product_ID) references Product(product_ID)
   ON DELETE CASCADE
