@@ -17,7 +17,6 @@ if(isset($_POST['phone'])){
 		signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 1, $conn, "", "");
 	}
 }
-
 function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$conn, $user, $pass){
 	$response ="";
 	if($cus_que){
@@ -27,7 +26,7 @@ function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$c
 		$cus_ID = mysqli_query($conn, "SELECT LAST_INSERT_ID();");
 	}
 	else{
-		if($result0){$response=$response+"You have signed up successfully. ";}
+		if($result){$response=$response+"You have signed up successfully. ";}
 		else{die("something went wrong.");}
 		$query = "INSERT INTO Customer (FirstName, LastName, Email_ID, Street_name, City)".
 		"VALUES ($first, $last, $email, $street, $city)";
@@ -59,7 +58,6 @@ function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$c
 	}
 	return $response;
 }
-
 ?>
 <html lang="en">
 

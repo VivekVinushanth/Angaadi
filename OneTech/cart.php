@@ -16,7 +16,7 @@ $items = mysqli_query($conn, $query);//||exit();
 				$query ="INSERT INTO orders (Total_Price,Order_date,Delivery_Method,customer_ID) VALUES ('$order_total', '$date','$delivery_method','$customer_ID'); SELECT @order_ID:=LAST_INSERT_ID() FROM orders; ";
 				while($row = mysqli_fetch_assoc($cart_result)){
 						$SKU = $row['SKU'];
-						echo $query.= "insert into order_detail values ('$SKU',@order_ID,(select Quantity from cart "
+						$query.= "insert into order_detail values ('$SKU',@order_ID,(select Quantity from cart "
 						."where customer_ID='$customer_ID' and SKU='$SKU' LIMIT 1));"
 						."UPDATE product_variant "
 						."set Stock = Stock - "
