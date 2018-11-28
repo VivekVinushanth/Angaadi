@@ -95,6 +95,7 @@
 			</div>
 		</nav>
 	</header>
+	<h3>Mostly ordered Category report</h3>
 <div class='container2'>
 	
 	
@@ -104,21 +105,23 @@ $query="SELECT category.category_name,count(order_detail.Quantity) as counts fro
 $result = mysqli_query($conn, $query);
 if($result){
 	$record = mysqli_fetch_assoc($result);
-	echo '<table class="universal_table"><tr class="universal_table">';
-		foreach($record as $key => $data){
-			echo "<th class='universal_table'>$key</th>";
+	if(sizeof($record)!=0){
+		echo '<table class="universal_table"><tr class="universal_table">';
+			foreach($record as $key => $data){
+				echo "<th class='universal_table'>$key</th>";
+			}
+			echo '</tr>';
+		while($record){
+			echo '<tr class="universal_table">';
+			foreach($record as $key => $data){
+				echo "<td class='universal_table' width='auto'>$data</td>";
+			}
+			echo '</tr>';
+			//echo '<td width="auto"><a class="_button" href="profile?client_id='.$customer[1].'">'.$customer[0].'</a></td>';
+			$record = mysqli_fetch_row($result);
 		}
-		echo '</tr>';
-	while($record){
-		echo '<tr class="universal_table">';
-		foreach($record as $key => $data){
-			echo "<td class='universal_table' width='auto'>$data</td>";
-		}
-		echo '</tr>';
-		//echo '<td width="auto"><a class="_button" href="profile?client_id='.$customer[1].'">'.$customer[0].'</a></td>';
-		$record = mysqli_fetch_row($result);
+		echo '</table>';
 	}
-	echo '</table>';
 }
 ?>
 <!--==============================================================================================================================-->
