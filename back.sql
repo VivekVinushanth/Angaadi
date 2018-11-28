@@ -6,7 +6,7 @@ CREATE TABLE users(
 customer_ID int,
 username varchar(255)not null,
 password varchar(255) not null,
-image blob,
+image longblob,
 unique(username),
 primary key (username,customer_ID)
 );
