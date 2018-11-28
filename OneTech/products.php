@@ -23,8 +23,8 @@
 		$category = $_GET['category'];
 		$query = "SELECT * FROM Product_Variant NATURAL JOIN Product NATURAL JOIN category_products NATURAL JOIN category WHERE category_name='$category'";
 	}
-	else if(isset($_GET['sub_category'])){
-		$sub_catergory = $_GET['sub_category'];
+	else if(isset($_GET['subcategory'])){
+		$sub_catergory = $_GET['subcategory'];
 		$query = "SELECT * FROM Product_Variant NATURAL JOIN Product NATURAL JOIN category_products WHERE sub_category_name='$sub_category'";
 	}
 	else{
