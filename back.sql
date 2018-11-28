@@ -20,11 +20,11 @@ use angaadi;
 CREATE TABLE Customer (
   customer_ID int NOT NULL AUTO_INCREMENT,
   Email_ID varchar(255) NOT NULL,
-  UserName varchar(255) NOT NULL ,
   Street_name varchar(255) NOT NULL,
   City varchar(255) NOT NULL,
   FirstName varchar(255) NOT NULL,
   LastName varchar(255)NOT NULL ,
+  Unique (Email_ID),
   PRIMARY KEY (customer_ID)
 );
 
