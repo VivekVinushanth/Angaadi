@@ -13,6 +13,7 @@
 		exit();
 	}
 	$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
+	$conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
 	$cart_page = "cart.php";
 ?>
 <html lang="en">

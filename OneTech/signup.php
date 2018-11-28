@@ -21,33 +21,33 @@ function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$c
 	$response ="";
 	if($cus_que){
 		$query = "INSERT INTO Guest (FirstName, LastName, Email_ID, Street_name, City)".
-		"VALUES ($first, $last, $email, $street, $city)";
+		"VALUES ('$first', '$last', '$email', '$street', '$city')";
 		$result = mysqli_query($conn, $query);
 		$cus_ID = mysqli_query($conn, "SELECT LAST_INSERT_ID();");
 	}
 	else{
-		if($result){$response=$response+"You have signed up successfully. ";}
-		else{die("something went wrong.");}
 		$query = "INSERT INTO Customer (FirstName, LastName, Email_ID, Street_name, City)".
-		"VALUES ($first, $last, $email, $street, $city)";
+		"VALUES ('$first', '$last', '$email', '$street', '$city')";
 		$result = mysqli_query($conn, $query);
-		$cus_ID = mysqli_query($conn, "SELECT LAST_INSERT_ID();");
+		$cus_ID = mysqli_fetch_row(mysqli_query($conn, "SELECT LAST_INSERT_ID();"))[0];
 		$pass = MD5($pass);
-		$query0 = "INSERT INTO User (customer_ID,username, password) VALUES ($cus_ID, $user, $pass)";
-		$result0 = mysqli_query($conn, $query0);
+		$query0 = "INSERT INTO users (customer_ID,username, password) VALUES ('$cus_ID', '$user', '$pass')";
+		$conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
+		$result0 = mysqli_query($conn1, $query0);
 	}
-	@mysqli_query($conn, "INSERT INTO Customer_Telephone VALUES ($cus_ID, $phone);");
-	
+	@mysqli_query($conn, "INSERT INTO Customer_Telephone VALUES ('$cus_ID', '$phone');");
+
 	if($result){
+		$response=$response+"You have signed up successfully. ";
 		if($cus_que){
 			//$query1 = "SELECT LAST_INSERT_ID() FROM Customer LIMIT 1;";
 			//$guest_id = mysqli_query($conn, $query1);
 			setcookie("guest", $cus_ID, time()+345600);
 		}
 		else{
-			setcookie("user", $username, time()+345600);
+			setcookie("user", $user, time()+345600);
 			setcookie("pass", $pass, time()+345600);
-			$result0 = mysqli_query($conn, "SELECT customer_ID FROM users WHERE username='$username' LIMIT 1;");
+			$result0 = mysqli_query($conn, "SELECT customer_ID FROM users WHERE username='$user' LIMIT 1;");
 			$customer_ID = mysqli_fetch_row($result0)[0];
 			setcookie("customer", $customer_ID, time()+345600);
 		}
