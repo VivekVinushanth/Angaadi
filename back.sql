@@ -278,7 +278,7 @@ BEGIN
 SELECT product.product_name,SUM(order_detail.Quantity) as amount_sold
 from  order_detail NATURAL JOIN  orders NATURAL JOIN product_variant NATURAL JOIN product
 where date(orders.Order_date ) between period1 and period2
-group by order_detail.SKU
+group by product_id
 order by SUM(order_detail.Quantity) DESC;
 end$$
 DELIMITER ;
