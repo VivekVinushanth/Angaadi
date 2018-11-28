@@ -1,7 +1,7 @@
 <?php
 	require_once 'header.php';
 	if(isset($_GET['order_ID'])){$order_ID = $_GET['order_ID'];}else{echo 'Select order first!';}
-	$query = "SELECT * FROM Product_Variant NATURAL JOIN Product NATURAL JOIN orders NATURAL JOIN order_detail NATURAL LEFT OUTER JOIN payment NATURAL LEFT OUTER JOIN shipping_address WHERE order_ID='$order_ID' LIMIT 1";
+	$query = "SELECT * FROM Product_Variant NATURAL JOIN Product NATURAL JOIN orders NATURAL JOIN order_detail NATURAL LEFT OUTER JOIN payment NATURAL LEFT OUTER JOIN shipping_address WHERE order_ID='$order_ID'";
 	$items = mysqli_query($conn, $query);//||exit();\
 ?>
 	<div class="cart_section"style="width:100%;">

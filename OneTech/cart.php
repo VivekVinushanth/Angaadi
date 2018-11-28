@@ -39,8 +39,6 @@ $items = mysqli_query($conn, $query);//||exit();
 		?>
 				<div class="row>">
 					<div class="col-lg-10 offset-lg-1">
-					<div class="col-lg-10 offset-lg-1">
-						<div class="cart_container">
 							<div class="cart_title">Shopping Cart</div>
 							<div class="cart_items">
 								<ul class="cart_list">
@@ -100,11 +98,9 @@ $items = mysqli_query($conn, $query);//||exit();
 							</div>
 
 							<div class="cart_buttons">
-								<form method="post" action="cart.php">
-									<input type="submit" name="submit" class="button cart_button_checkout" value="CheckOut" onclick="submit">
-								</form>
-							</div>
-						</div>
+							<form method="post" action="cart.php">
+								<input type="submit" name="submit" class="button cart_button_checkout" value="CheckOut" onclick="submit">
+							</form>
 					</div>
 				</div>
 			<?php }?>
