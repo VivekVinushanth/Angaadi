@@ -95,30 +95,46 @@
 			</div>
 		</nav>
 	</header>
+	<h3>Most ordered product report</h3>
+	<form style='padding-left:100px;' method='get' action='#'>
+		<input type='date' name='date1' />
+		<input type='date' name='date2' />
+		<input type='submit' Value='View Report'/>
+	</form>
+
 <div class='container2'>
 	
 	
 <!--==============================================================================================================================-->
 <?php
-$query="Select * from orders where customer_ID = '$customer_ID'"; //********Change Query Here*********
-$result = mysqli_query($conn, $query);
-if($result){
-	$record = mysqli_fetch_assoc($result);
-	echo '<table class="universal_table"><tr class="universal_table">';
-		foreach($record as $key => $data){
-			echo "<th class='universal_table'>$key</th>";
+if(isset($_GET['date1'])&&isset($_GET['date2'])){
+	$date1 = date_format(date_create($_GET['date1']),'Y-m-d');
+	$date2 = date_format(date_create($_GET['date2']),'Y-m-d');
+	$query="call desired_product('$date1','$date2') "; //********Change Query Here*********
+	$result = mysqli_query($conn, $query);
+	if($result){
+		$record = mysqli_fetch_assoc($result);
+		if(sizeof($record)!=0){
+			echo '<table class="universal_table"><tr class="universal_table">';
+				foreach($record as $key => $data){
+					echo "<th class='universal_table'>$key</th>";
+				}
+				echo '</tr>';
+			while($record){
+				echo '<tr class="universal_table">';
+				foreach($record as $key => $data){
+					echo "<td class='universal_table' width='auto'>$data</td>";
+				}
+				echo '</tr>';
+				//echo '<td width="auto"><a class="_button" href="profile?client_id='.$customer[1].'">'.$customer[0].'</a></td>';
+				$record = mysqli_fetch_row($result);
+			}
+			echo '</table>';
 		}
-		echo '</tr>';
-	while($record){
-		echo '<tr class="universal_table">';
-		foreach($record as $key => $data){
-			echo "<td class='universal_table' width='auto'>$data</td>";
-		}
-		echo '</tr>';
-		//echo '<td width="auto"><a class="_button" href="profile?client_id='.$customer[1].'">'.$customer[0].'</a></td>';
-		$record = mysqli_fetch_row($result);
 	}
-	echo '</table>';
+	else {
+		echo 'Incorrect date range!';
+	}
 }
 ?>
 <!--==============================================================================================================================-->

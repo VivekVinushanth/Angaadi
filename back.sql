@@ -6,7 +6,7 @@ CREATE TABLE users(
 customer_ID int,
 username varchar(255)not null,
 password varchar(255) not null,
-image blob,
+image longblob,
 unique(username),
 primary key (username,customer_ID)
 );
@@ -20,16 +20,16 @@ use angaadi;
 CREATE TABLE Customer (
   customer_ID int NOT NULL AUTO_INCREMENT,
   Email_ID varchar(255) NOT NULL,
-  UserName varchar(255) NOT NULL ,
   Street_name varchar(255) NOT NULL,
   City varchar(255) NOT NULL,
   FirstName varchar(255) NOT NULL,
   LastName varchar(255)NOT NULL ,
+  Unique (Email_ID),
   PRIMARY KEY (customer_ID)
 );
 
 CREATE TABLE Orders (
-  order_ID int NOT NULL AUTO_INCREMENT,
+  order_id int NOT NULL AUTO_INCREMENT,
   Total_Price numeric(9,2) NOT NULL,
   Order_date datetime NOT NULL ,
   Delivery_Method enum("Home Delivery","Store Pickup"),
@@ -85,7 +85,7 @@ CREATE TABLE Product_Variant (
   Stock int ,
   unit_Price numeric(9,2),
   weight numeric(5,2),
-  Image blob,
+  Image longblob,
   PRIMARY KEY (SKU),
    Foreign KEY (product_ID) references Product(product_ID)
   ON DELETE CASCADE
@@ -191,7 +191,12 @@ CREATE TABLE Customer_Telephone (
 );
 
 
+create table main_city(
+    mcity varchar(255) not null
+);
 
+CREATE INDEX idx_product
+ON product (product_name);
 
 
 DROP PROCEDURE IF EXISTS validate_phone;
@@ -258,10 +263,36 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE DEFINER=`` PROCEDURE `sales_report`(IN `period` INT)
+CREATE PROCEDURE `sales_report`(`period` INT)
 BEGIN
 SELECT orders.order_ID,orders.Order_date,customer.FirstName ,orders.Total_Price ,orders.Delivery_Method , payment.Payment_status ,payment.Payment_method,orders.Total_Price,shipping_address.Address_Line,shipping_address.City,shipping_address.State,freight_details.Shipping_Status
 FROM orders natural join customer natural left outer join shipping_address NATURAL left outer JOIN freight_details Natural left outer JOIN payment where year(orders.Order_date)=period;
 
 end$$
 DELIMITER ;
+
+
+DELIMITER $$
+CREATE  PROCEDURE desired_product(period1 date, period2 date)
+BEGIN
+SELECT product.product_name,SUM(order_detail.Quantity) as amount_sold
+from  order_detail NATURAL JOIN  orders NATURAL JOIN product_variant NATURAL JOIN product
+where date(orders.Order_date ) between period1 and period2
+group by product_id
+order by SUM(order_detail.Quantity) DESC;
+end$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE  PROCEDURE product_analytics(product1 varchar(255))
+BEGIN
+SELECT product.product_name,orders.Order_date,order_detail.Quantity
+from product NATURAL JOIN product_variant NATURAL JOIN order_detail NATURAL JOIN  orders
+where lower(product.product_name) like concat('%',product1,'%')
+order BY order_detail.Quantity DESC;
+
+end$$
+DELIMITER ;
+
+

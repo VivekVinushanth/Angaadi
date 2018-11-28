@@ -9,10 +9,10 @@ if(isset($_GET['order_ID'])&&isset($_GET['payment_ID'])){
 	if($result0!=0){
 		$query = "UPDATE payment SET Payment_status = 'paid' where payment_ID='$payment_ID';";
 		$result = mysqli_query($conn, $query);
-		if($result){echo "You Order has been paid Successfully. Your order wil be confirmed within few hours!";}
+		if($result){echo "<div class='container2'>You Order has been paid Successfully. Your order wil be confirmed within few hours!</div>";}
 	}
 	else{
-		echo "You Order has been Recorded Successfully. Your order wil be Delivered!";
+		echo "<div class='container2'>You Order has been Recorded Successfully. Your order wil be Delivered!</div>";
 	}
 }
 

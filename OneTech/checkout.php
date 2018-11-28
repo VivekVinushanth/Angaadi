@@ -1,6 +1,6 @@
 <?php
 require_once 'header.php';
-if(isset($_POST['phone'])){
+if(isset($_POST['submit'])){
 	$firstname = $_POST['firstname'];
 	$lastname = $_POST['lastname'];
 	$street = $_POST['street'];
@@ -37,6 +37,8 @@ if(isset($_POST['phone'])){
 	else{
 		echo'<meta http-equiv="refresh" content="0;url=paymentconfirmed.php?order_ID=$order_ID&payment_ID=$payment_ID">';
 	}
+}
+else{
 	
 }
 
@@ -52,6 +54,9 @@ if(isset($_POST['phone'])){
 										<div class='left1'><input type="radio" name="deliverymethod" value="Store Pickup" checked="checked"/>Pick Up</div></br>
 										<div class='left1'><input type="radio" name="deliverymethod" value="Home Delivery" id="doordelivery"/> Door Delivery</div></br>
 										<div id='addresscontainer' hidden='True'>
+											<div class="col-md-6 mb-3">
+												Order will be delivered within: <?php echo $deliverytime;?>
+											</div>
 											<div class="col-md-6 mb-3">
 												<input type="text" class="form-control" id="first_name" name="firstname"value="" placeholder="First Name">
 											</div>

@@ -1651,6 +1651,6 @@ th, tr[class=universal_table]{
 
 }
 td[class=universal_table]{
-	padding:4px 15px 4px 10px;
-	text-align:right;
+	padding:4px 15px 4px 20px;
+	text-align:left;
 }
