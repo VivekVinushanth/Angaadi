@@ -195,6 +195,9 @@ create table main_city(
     mcity varchar(255) not null
 );
 
+CREATE INDEX idx_product
+ON product (product_name);
+
 
 DROP PROCEDURE IF EXISTS validate_phone;
 DELIMITER $$
