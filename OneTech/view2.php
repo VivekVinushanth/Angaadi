@@ -126,7 +126,6 @@ if($result){
 			$record = mysqli_fetch_row($result);
 		}
 		echo '</table>';
-	}
 }
 }
 

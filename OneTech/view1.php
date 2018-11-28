@@ -105,6 +105,8 @@ $query="select customer.FirstName , orders.order_ID , orders.Order_date, orders.
 $result = mysqli_query($conn, $query);
 if($result){
 	$record = mysqli_fetch_assoc($result);
+	if($result){
+	$record = mysqli_fetch_assoc($result);
 	if(sizeof($record)!=0){
 		echo '<table class="universal_table"><tr class="universal_table">';
 			foreach($record as $key => $data){
@@ -121,7 +123,6 @@ if($result){
 			$record = mysqli_fetch_row($result);
 		}
 		echo '</table>';
-	}
 }
 ?>
 <!--==============================================================================================================================-->

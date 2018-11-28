@@ -19,27 +19,27 @@ if(isset($_POST['submit'])){
 		$result = mysqli_query($conn, $query);
 		if(!$result){die('Something went wrong!');}
 	}
-	$query = "INSERT INTO shipping_address (FirstName,LastName,	order_ID,City,State,Zip_Code,Address_Line,PhoneNumber)"
+	else{
+		$query = "INSERT INTO shipping_address (FirstName,LastName,	order_ID,City,State,Zip_Code,Address_Line,PhoneNumber)"
 									."VALUES('$firstname','$lastname','$order_ID', '$city','$state', '$zip','$street','$phone');";
-	$result = mysqli_query($conn, $query);
+		$result = mysqli_query($conn, $query);
+	}
+	
 	$query1 = "INSERT INTO payment (order_Id,Payment_method,Payment_Date,Payment_status)"
 									."VALUES('$order_ID','$payment_method','$date', '$payment_status');";
-	$result1	= mysqli_query($conn, $query1);
-	$payment_ID= mysqli_fetch_assoc(mysqli_query($conn, "SELECT LAST_INSERT_ID() AS 'pid' FROM payment;"))['pid'];
+	$result1 = mysqli_query($conn, $query1);
+	$payment_ID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT max(Payment_ID) AS 'pid' FROM payment;"))['pid'];
 	if(!$result1){
-		if(mysqli_query($conn, "Select * from shipping_address where order_ID='$$order_ID'")){
+		if(mysqli_query($conn, "Select * from shipping_address where order_ID='$order_ID'")){
 			$payment_ID= mysqli_fetch_assoc(mysqli_query($conn, "SELECT Payment_ID AS 'pid' FROM payment WHERE order_ID='$order_ID';"))['pid'];
-			echo "Order Already Confirmed!</br><a href='paymentconfirmed.php?order_ID=$order_ID&payment_ID=$payment_ID'>To pay the order >>></a>";}
+			echo "Order Already Confirmed!</br><a href='paymentconfirmed.php?order_ID=$order_ID&payment_ID=$payment_ID&city=$city'>To pay the order >>></a>";}
 		else{
 			die('Something went wrong!');
 		}
 	}
 	else{
-		echo'<meta http-equiv="refresh" content="0;url=paymentconfirmed.php?order_ID=$order_ID&payment_ID=$payment_ID">';
+		echo'<meta http-equiv="refresh" content="0;url=paymentconfirmed.php?order_ID=$order_ID&payment_ID='.$payment_ID.'&city='.$city.'">';
 	}
-}
-else{
-	
 }
 
 ?>
@@ -54,9 +54,6 @@ else{
 										<div class='left1'><input type="radio" name="deliverymethod" value="Store Pickup" checked="checked"/>Pick Up</div></br>
 										<div class='left1'><input type="radio" name="deliverymethod" value="Home Delivery" id="doordelivery"/> Door Delivery</div></br>
 										<div id='addresscontainer' hidden='True'>
-											<div class="col-md-6 mb-3">
-												Order will be delivered within: <?php echo $deliverytime;?>
-											</div>
 											<div class="col-md-6 mb-3">
 												<input type="text" class="form-control" id="first_name" name="firstname"value="" placeholder="First Name">
 											</div>

@@ -101,7 +101,6 @@
 		<input type='date' name='date2' />
 		<input type='submit' Value='View Report'/>
 	</form>
-
 <div class='container2'>
 	
 	

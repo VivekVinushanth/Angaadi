@@ -101,7 +101,6 @@
 		<input type='test' name='product' />
 		<input type='submit' Value='View Report'/>
 	</form>
-
 <div class='container2'>
 	
 	

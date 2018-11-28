@@ -7,6 +7,7 @@ CREATE USER IF NOT EXISTS 'admin' IDENTIFIED BY '3333';
 GRANT SELECT,INSERT,DELETE,UPDATE ON angaadi.cart TO public_access;
 GRANT SELECT,INSERT,DELETE,UPDATE ON angaadi_users.users TO public_access;
 GRANT SELECT,INSERT,DELETE,UPDATE ON angaadi.Product_Variant TO public_access;
+GRANT SELECT ON angaadi.main_city TO public_access;
 GRANT SELECT,INSERT,DELETE,UPDATE ON angaadi.variant_detail TO public_access;
 GRANT SELECT,INSERT,DELETE,UPDATE ON angaadi.Product TO public_access;
 GRANT SELECT,INSERT,DELETE,UPDATE ON angaadi.category TO public_access;
