@@ -171,7 +171,6 @@ CREATE TABLE Order_Detail(
 CREATE TABLE Guest (
 customer_ID int NOT NULL AUTO_INCREMENT,
   Email_ID varchar(255) not null,
-  UserName varchar(255) not null ,
   FirstName varchar(255)not null,
   LastName varchar(255),
   Street_name varchar(255) not null,
