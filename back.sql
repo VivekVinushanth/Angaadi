@@ -570,3 +570,10 @@ order BY order_detail.Quantity DESC;
 end$$
 
 DELIMITER ;
+
+
+
+
+create view  customer_order_report as select customer.FirstName , orders.order_ID , orders.Order_date, orders.Total_Price from customer natural join orders;
+
+create view mostly_ordered_category_report as SELECT category.category_name,count(order_detail.Quantity) as counts from category natural join category_products NATURAL join product_variant NATURAL join order_detail group by category.pid;
