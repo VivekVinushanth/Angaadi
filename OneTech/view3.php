@@ -101,7 +101,7 @@
 	
 <!--==============================================================================================================================-->
 <?php
-$query="SELECT category.category_name,count(order_detail.Quantity) as counts from category natural join category_products NATURAL join product_variant NATURAL join order_detail group by category.pid;"; //********Change Query Here*********
+$query="SELECT * from mostly_ordered_category_report;"; //********Change Query Here*********
 $result = mysqli_query($conn, $query);
 if($result){
 	$record = mysqli_fetch_assoc($result);

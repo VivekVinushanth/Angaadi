@@ -20,18 +20,18 @@ if(isset($_POST['phone'])){
 function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$conn, $user, $pass){
 	$response ="";
 	$date = date('Y-m-d H:i:s');
-	$query = "INSERT INTO Customer (FirstName, LastName, Email_ID, Street_name, City, date_joined)".
-	"VALUES ('$first', '$last', '$email', '$street', '$city', '$date')";
-	$result = mysqli_query($conn, $query);
+	$query = mysqli_prepare($conn,"INSERT INTO Customer (FirstName, LastName, Email_ID, Street_name, City, date_joined)VALUES (?,?,?,?,?,?)");
+	$query0=mysqli_stmt_bind_param($query, "ssssss", $first, $last, $email, $street, $city, $date);
+	$result =mysqli_stmt_execute($query);
 	$cus_ID = mysqli_fetch_row(mysqli_query($conn, "SELECT LAST_INSERT_ID();"))[0];
 	if(!$cus_que){
 		$pass = MD5($pass);
-		$query0 = "INSERT INTO users (customer_ID,username, password) VALUES ('$cus_ID', '$user', '$pass')";
 		$conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
-		$result0 = mysqli_query($conn1, $query0);
+		$query0 = mysqli_prepare($conn1, "INSERT INTO users (customer_ID,username, password) VALUES (?,?,?)");
+		$query=mysqli_stmt_bind_param($query0, "sss", $cus_ID, $user, $pass);
+		$result0 = mysqli_stmt_execute($query0);
 	}
 	@mysqli_query($conn, "INSERT INTO Customer_Telephone VALUES ('$cus_ID', '$phone');");
-
 	if($result){
 		setcookie("customer", $cus_ID, time()+345600);
 		$response=$response+"You have signed up successfully. ";

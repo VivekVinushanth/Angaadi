@@ -95,12 +95,12 @@
 			</div>
 		</nav>
 	</header>
-	</br>
+	</br>	<h3>Sales Report</h3>
 	<form style='padding-left:100px;' method='get' action='#'>
 		<input type='number' name='year' />
 		<input type='submit' Value='View Report'/>
 	</form>
-	<h3>Sales Report</h3>
+
 <div class='container2'>
 <!--==============================================================================================================================-->
 <?php
@@ -120,6 +120,7 @@ if($result){
 			echo '<tr class="universal_table">';
 			foreach($record as $key => $data){
 				echo "<td class='universal_table' width='auto'>$data</td>";
+				$data=null;
 			}
 			echo '</tr>';
 			//echo '<td width="auto"><a class="_button" href="profile?client_id='.$customer[1].'">'.$customer[0].'</a></td>';

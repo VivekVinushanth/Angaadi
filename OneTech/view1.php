@@ -101,7 +101,7 @@
 	
 <!--==============================================================================================================================-->
 <?php
-$query="select customer.FirstName , orders.order_ID , orders.Order_date, orders.Total_Price from customer natural join orders"; //********Change Query Here*********
+$query="select * from customer_order_report"; //********Change Query Here*********
 $result = mysqli_query($conn, $query);
 if($result){
 	$record = mysqli_fetch_assoc($result);
