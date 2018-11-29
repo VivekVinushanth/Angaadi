@@ -20,6 +20,7 @@ unique(username),
 
 primary key (username,customer_ID)
 
+
 );
 
 
