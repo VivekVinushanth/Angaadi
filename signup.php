@@ -1,88 +1,51 @@
 <?php 
-if (isset($_POST['phone'])) {
-    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
-    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $street = mysqli_real_escape_string($conn, $_POST['street']);
-    $city = mysqli_real_escape_string($conn, $_POST['city']);
-    $zip = mysqli_real_escape_string($conn, $_POST['zip']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $conn = mysqli_connect("localhost", "root", "", "angaadi");
-    $conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
-
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 0, $conn, $username, $password, $conn1);
-} else {
-    signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 1, $conn, "", "", $conn1);
-    }
+if(isset($_POST['phone'])){
+		$firstname = $_POST['firstname'];
+		$lastname = $_POST['lastname'];
+		$email = $_POST['email'];
+		$street = $_POST['street'];
+		$city = $_POST['city'];
+		$zip = $_POST['zip'];
+		$phone = $_POST['phone'];
+		$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
+	if(isset($_POST['account'])&&$_POST['account']==true){
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 0, $conn, $username, $password);
+	}
+	else{
+		signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 1, $conn, "", "");
+	}
 }
 function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$conn, $user, $pass){
 	$response ="";
 	$date = date('Y-m-d H:i:s');
-	$query = "INSERT INTO Customer (FirstName, LastName, Email_ID, Street_name, City, date_joined)".
-    "VALUES (?, ?, ?, ?, ?,?)";
-    
-    $stmt = mysqli_stmt_init($conn);
-        if (!mysqli_stmt_prepare($stmt, $query)) {
-            echo "SQL error";
-        } else {
-            mysqli_stmt_bind_param($stmt, "ssssss", $first, $last, $email, $street, $city,$date);
-            mysqli_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-        }
-
-	//$result = mysqli_query($conn, $query);
+	$query = mysqli_prepare($conn,"INSERT INTO Customer (FirstName, LastName, Email_ID, Street_name, City, date_joined)VALUES (?,?,?,?,?,?)");
+	$query0=mysqli_stmt_bind_param($query, "ssssss", $first, $last, $email, $street, $city, $date);
+	$result =mysqli_stmt_execute($query);
 	$cus_ID = mysqli_fetch_row(mysqli_query($conn, "SELECT LAST_INSERT_ID();"))[0];
 	if(!$cus_que){
 		$pass = MD5($pass);
-		$query0 = "INSERT INTO users (customer_ID,username, password) VALUES (?, ?, ?)";
-        $conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
-        
-        $stmt = mysqli_stmt_init($conn1);
-        if (!mysqli_stmt_prepare($stmt, $query0)) {
-            echo "SQL error";
-        } else {
-            mysqli_stmt_bind_param($stmt, "iss", $cus_ID, $user, $pass);
-            mysqli_execute($stmt);
-            $result0 = mysqli_stmt_get_result($stmt);
-
-        }
-
-        //$result0 = mysqli_query($conn1, $query0);
+		$conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
+		$query0 = mysqli_prepare($conn1, "INSERT INTO users (customer_ID,username, password) VALUES (?,?,?)");
+		$query=mysqli_stmt_bind_param($query0, "sss", $cus_ID, $user, $pass);
+		$result0 = mysqli_stmt_execute($query0);
 	}
-// Insert the user Telephone Number
-$query1 = "INSERT INTO Customer_Telephone VALUES (?, ?);";
-
-$stmt = mysyli_stmt_init($conn);
-if (!mysqli_stmt_prepare($stmt, $query1)) {
-    echo "SQL error";
-} else {
-    mysqli_stmt_bind_params($stmt, "ii", $cus_ID, $phone);
-    mysqli_execute($stmt);
-
-    if ($result) {
-        if ($cus_que) {
-            //$query1 = "SELECT LAST_INSERT_ID() FROM Customer LIMIT 1;";
-            //$guest_id = mysqli_query($conn, $query1);
-            setcookie("guest", $cus_ID, time() + 345600);
-        } else {
-            setcookie("user", $user, time() + 345600);
-            setcookie("pass", $pass, time() + 345600);
-            $result0 = mysqli_query($conn, "SELECT customer_ID FROM users WHERE username='$user' LIMIT 1;");
-            $customer_ID = mysqli_fetch_row($result0)[0];
-            setcookie("customer", $customer_ID, time() + 345600);
-        }
-        header("Location: home.php");
-    } else {
-        die("something went wrong.");
-    }
-    return $response;
+	@mysqli_query($conn, "INSERT INTO Customer_Telephone VALUES ('$cus_ID', '$phone');");
+	if($result){
+		setcookie("customer", $cus_ID, time()+345600);
+		$response=$response+"You have signed up successfully. ";
+		if(!$cus_que){
+			setcookie("user", $user, time()+345600);
+			setcookie("pass", $pass, time()+345600);
+		}
+		header("Location: home.php");
+	}
+	else{
+		die("something went wrong.");
+	}
+	return $response;
 }
-}
-
-
 ?>
 <html lang="en">
 
