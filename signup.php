@@ -1,12 +1,12 @@
 <?php 
 if (isset($_POST['phone'])) {
-    $firstname = mysqli_real_escape_string(conn, $_POST['firstname']);
-    $lastname = mysqli_real_escape_string(conn, $_POST['lastname']);
-    $email = mysqli_real_escape_string(conn, $_POST['email']);
-    $street = mysqli_real_escape_string(conn, $_POST['street']);
-    $city = mysqli_real_escape_string(conn, $_POST['city']);
-    $zip = mysqli_real_escape_string(conn, $_POST['zip']);
-    $phone = mysqli_real_escape_string(conn, $_POST['phone']);
+    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $street = mysqli_real_escape_string($conn, $_POST['street']);
+    $city = mysqli_real_escape_string($conn, $_POST['city']);
+    $zip = mysqli_real_escape_string($conn, $_POST['zip']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
     $conn = mysqli_connect("localhost", "root", "", "angaadi");
     $conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
 
@@ -24,11 +24,11 @@ function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$c
 	$query = "INSERT INTO Customer (FirstName, LastName, Email_ID, Street_name, City, date_joined)".
     "VALUES (?, ?, ?, ?, ?,?)";
     
-    $stmt = mysyli_stmt_init($conn);
-        if (!mysqli_stmt_init($stmt, $query)) {
+    $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $query)) {
             echo "SQL error";
         } else {
-            mysqli_stmt_bind_params($stmt, "ssssss", $first, $last, $email, $street, $city,$date);
+            mysqli_stmt_bind_param($stmt, "ssssss", $first, $last, $email, $street, $city,$date);
             mysqli_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
         }
@@ -40,11 +40,11 @@ function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$c
 		$query0 = "INSERT INTO users (customer_ID,username, password) VALUES (?, ?, ?)";
         $conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
         
-        $stmt = mysyli_stmt_init($conn1);
-        if (!mysqli_stmt_init($stmt, $query0)) {
+        $stmt = mysqli_stmt_init($conn1);
+        if (!mysqli_stmt_prepare($stmt, $query0)) {
             echo "SQL error";
         } else {
-            mysqli_stmt_bind_params($stmt, "iss", $cus_ID, $user, $pass);
+            mysqli_stmt_bind_param($stmt, "iss", $cus_ID, $user, $pass);
             mysqli_execute($stmt);
             $result0 = mysqli_stmt_get_result($stmt);
 
@@ -56,7 +56,7 @@ function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$c
 $query1 = "INSERT INTO Customer_Telephone VALUES (?, ?);";
 
 $stmt = mysyli_stmt_init($conn);
-if (!mysqli_stmt_init($stmt, $query1)) {
+if (!mysqli_stmt_prepare($stmt, $query1)) {
     echo "SQL error";
 } else {
     mysqli_stmt_bind_params($stmt, "ii", $cus_ID, $phone);
