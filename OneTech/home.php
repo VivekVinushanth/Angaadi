@@ -56,6 +56,9 @@ $conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
 					
 							</div>
 							<div class="top_bar_user">
+								<b>User: <?php $temp = isset($_COOKIE['user'])?$_COOKIE['user']: $customer_ID; echo $temp;?></b>
+							</div>
+							<div class="top_bar_user">
 								<b><a href='orders.php'>Orders</a></b>
 							</div>
 							<div class="top_bar_user">
