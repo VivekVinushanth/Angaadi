@@ -11,8 +11,8 @@ if (isset($_POST['phone'])) {
     $conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
 
     if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username = mysqli_real_escape_string(conn, $_POST['username']);
-    $password = mysqli_real_escape_string(conn, $_POST['password']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
     signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 0, $conn, $username, $password, $conn1);
 } else {
     signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 1, $conn, "", "", $conn1);
