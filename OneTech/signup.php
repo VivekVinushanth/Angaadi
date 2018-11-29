@@ -1,148 +1,313 @@
-<?php
-if(isset($_POST['username'])&&isset($_POST['password'])){
-	$username = $_POST['username'];
-	$password = MD5($_POST['password']);
-	$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
-	$result0 = mysqli_query($conn, "SELECT customer_ID FROM users WHERE username='$username' LIMIT 1;");
-	$result = mysqli_num_rows($result0);
-	$result1 = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE username='$username' AND Password='$password' LIMIT 1;"));
-	if($result==1){
-		
-		if($result1==1){
-			$customer_ID = mysqli_fetch_row($result0)[0];
-			setcookie("user", $username, time()+345600);
-			setcookie("pass", $password, time()+345600);
-			setcookie("customer", $customer_ID, time()+345600);
-			if($username=='admin'){
-				header("Location: adminhome.php");
-			}
-			else{
-				header("Location: home.php");
-			}
-			
-		}
-		else{
-			echo "Incorrect password, Try again!";
-		}
+<?php 
+if(isset($_POST['phone'])){
+		$firstname = $_POST['firstname'];
+		$lastname = $_POST['lastname'];
+		$email = $_POST['email'];
+		$street = $_POST['street'];
+		$city = $_POST['city'];
+		$zip = $_POST['zip'];
+		$phone = $_POST['phone'];
+		$conn = mysqli_connect("localhost", "public_access", "0000", "angaadi");
+	if(isset($_POST['account'])&&$_POST['account']==true){
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 0, $conn, $username, $password);
 	}
 	else{
-		echo "Incorrect User name!";
+		signup($firstname, $lastname, $email, $street, $city, $zip, $phone, 1, $conn, "", "");
 	}
 }
-else{
-	if((isset($_COOKIE['guest'])||(isset($_COOKIE['user'])&&isset($_COOKIE['pass'])))){
-		if($_COOKIE['user']=='admin'){
-			header("Location: adminhome.php");
-		}
-		else{
-			header("Location: home.php");
-		}
-		exit();
+function signup($first, $last, $email, $street, $city, $zip, $phone, $cus_que,$conn, $user, $pass){
+	$response ="";
+	$date = date('Y-m-d H:i:s');
+	$query = "INSERT INTO Customer (FirstName, LastName, Email_ID, Street_name, City, date_joined)".
+	"VALUES ('$first', '$last', '$email', '$street', '$city', '$date')";
+	$result = mysqli_query($conn, $query);
+	$cus_ID = mysqli_fetch_row(mysqli_query($conn, "SELECT LAST_INSERT_ID();"))[0];
+	if(!$cus_que){
+		$pass = MD5($pass);
+		$query0 = "INSERT INTO users (customer_ID,username, password) VALUES ('$cus_ID', '$user', '$pass')";
+		$conn1 = mysqli_connect("localhost", "public_access", "0000", "angaadi_users");
+		$result0 = mysqli_query($conn1, $query0);
 	}
+	@mysqli_query($conn, "INSERT INTO Customer_Telephone VALUES ('$cus_ID', '$phone');");
+
+	if($result){
+		setcookie("customer", $cus_ID, time()+345600);
+		$response=$response+"You have signed up successfully. ";
+		if(!$cus_que){
+			setcookie("user", $user, time()+345600);
+			setcookie("pass", $pass, time()+345600);
+		}
+		header("Location: home.php");
+	}
+	else{
+		die("something went wrong.");
+	}
+	return $response;
 }
 ?>
 <html lang="en">
+
 <head>
-	<title>Login V10</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Amado - Furniture Ecommerce Template | Checkout</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="css/core-style.css">
+    <link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+
 </head>
+
 <body>
-	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100 p-t-50 p-b-90">
-				<form method="post" action="index.php" class="login100-form validate-form">
-					<span class="login100-form-avatar">
-						<img src="images/avatar-01.jpg" alt="AVATAR">
-					</span>
-					<span class="login100-form-title">
-						Welcome
-					</span>
-					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
-						<input class="input100" type="text" name="username" id ="username">
-						<span class="focus-input100" data-placeholder="username"></span>
+
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+        <!-- Mobile Nav (max width 767px)-->
+        <div class="mobile-nav">
+            <!-- Navbar Brand -->
+            <div class="logo"><a href="index.php">OneTech</a></div>
+            <!-- Navbar Toggler -->
+            <div class="amado-navbar-toggler">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Header Area Start -->
+        <header class="header-area clearfix" style="margin-top:-35px;">
+            <!-- Close Icon -->
+            <div class="nav-close">
+                <i class="fa fa-close" aria-hidden="true"></i>
+            </div>
+            <!-- Logo -->
+            <div class="logo"><a href="index.php">OneTech</a></div>
+		</header>
+
+        <!-- Header Area End -->
+		<div align="center" style="margin:-100px 0 0 50px;">
+			<div class="cart-table-area" style="padding:0 100px 100px 100px;">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="">
+							<div class="checkout_details_area mt-50 clearfix">
+
+								<div class="cart-title">
+									<h2>Sign Up | Quest Login</h2>
+								</div>
+								
+									<form action="#" method="post">
+										<div class="row">
+											<div class="col-md-6 mb-3">
+												<input type="text" class="form-control" id="first_name" name="firstname"value="" placeholder="First Name" required>
+											</div>
+											<div class="col-md-6 mb-3">
+												<input type="text" class="form-control" id="last_name" name="lastname"value="" placeholder="Last Name" required>
+											</div>
+											<div class="col-12 mb-3">
+												<input type="email" class="form-control" id="email" name="email"placeholder="Email" value="" required>
+											</div>
+											<!--<div class="col-12 mb-3">
+												<select class="w-100" id="country">
+												<option value="usa">United States</option>
+												<option value="uk">United Kingdom</option>
+												<option value="ger">Germany</option>
+												<option value="fra">France</option>
+												<option value="ind">India</option>
+												<option value="aus">Australia</option>
+												<option value="bra">Brazil</option>
+												<option value="cana">Canada</option>
+											</select>
+											</div>-->
+											<div class="col-12 mb-3">
+												<input type="text" class="form-control mb-3" id="street_address" name="street" placeholder="Address" value="" required>
+											</div>
+											<div class="col-12 mb-3">
+												<input type="text" class="form-control" id="city" name="city"placeholder="Town" value="" required>
+											</div>
+											<div class="col-md-6 mb-3">
+												<input type="text" class="form-control" id="zipCode"name="zip" placeholder="Zip Code" value="">
+											</div>
+											<div class="col-md-6 mb-3">
+												<input type="number" class="form-control" id="phone_number" name="phone" min="0" placeholder="Phone No" value="" required>
+											</div>
+											<!--<div class="col-12 mb-3">
+												<textarea name="comment" class="form-control w-100" id="comment" cols="30" rows="10" placeholder="Leave a comment about your order"></textarea>
+											</div>-->
+											<div class="col-12 mb-3">
+												<input type="text" class="form-control" id="username" name="username" placeholder="User Name" value="" hidden="True">
+											</div>
+											<div class="col-12 mb-3">
+												<input type="password" class="form-control" id="password" name="password" placeholder="Pass Word" value="" hidden="True">
+											</div>
+											<div class="col-12" align="left">
+												<div class="custom-control custom-checkbox d-block mb-2">
+													<input type="checkbox" class="custom-control-input" name="account" id="createaccount">
+													<label class="custom-control-label" for="createaccount">Create an accout</label>
+												</div>
+											</div>
+										</div>
+										<div class="container-login100-form-btn m-t-17">
+											<button class="login100-form-btn" >
+												Get into the Site>>>
+											</button>
+										</div>
+										</br>
+										<a href="index.php" class="txt2">
+											Login
+										</a>
+									</form>
+							</div>
+						</div>
 					</div>
-
-					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-						<input class="input100" type="password" name="password" id ="password">
-						<span class="focus-input100" data-placeholder="password"></span>
-					</div>
-
-					<ul class="login-more p-t-20">
-						<li class="m-b-8">
-							<span class="txt1">
-								Forgot
-							</span>
-
-							<a href="#" class="txt2">
-								username / password?
-							</a>
-						</li>
-
-						<li>
-							<span class="txt1">
-								Don’t have an account?
-							</span>
-
-							<a href="signup.php" class="txt2">
-								Sign up&nbsp;|&nbsp;
-								Guest Login
-							</a>
-						</li>
-					</ul><div class="container-login100-form-btn">
-					<input value="Login"  type="submit" class="login100-form-btn" id="login0">
-					
 				</div>
-				</form>
-			
-				
+			</div>
+		</div>
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
 
+<!-- Newsletter -->
+
+	<div class="newsletter">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter_container d-flex flex-lg-row flex-column align-items-lg-center align-items-center justify-content-lg-start justify-content-center">
+						<div class="newsletter_title_container">
+							<div class="newsletter_icon"><img src="images/send.png" alt=""></div>
+							<div class="newsletter_title">Sign up for Newsletter</div>
+							<div class="newsletter_text"><p>...and receive %20 coupon for first shopping.</p></div>
+						</div>
+						<div class="newsletter_content clearfix">
+							<form action="#" class="newsletter_form">
+								<input type="email" class="newsletter_input" required="required" placeholder="Enter your email address">
+								<button class="newsletter_button">Subscribe</button>
+							</form>
+							<div class="newsletter_unsubscribe_link"><a href="#">unsubscribe</a></div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	
 
-	<div id="dropDownSelect1"></div>
-	
-<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<!-- Footer -->
 
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-3 footer_col">
+					<div class="footer_column footer_contact">
+						<div class="logo_container">
+							<div class="logo"><a href="#">OneTech</a></div>
+						</div>
+						<div class="footer_title">Got Question? Call Us 24/7</div>
+						<div class="footer_phone">+38 068 005 3570</div>
+						<div class="footer_contact_text">
+							<p>17 Princess Road, London</p>
+							<p>Grester London NW18JR, UK</p>
+						</div>
+						<div class="footer_social">
+							<ul>
+								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+								<li><a href="#"><i class="fab fa-google"></i></a></li>
+								<li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-2 offset-lg-2">
+					<div class="footer_column">
+						<div class="footer_title">Find it Fast</div>
+						<ul class="footer_list">
+							<li><a href="#">Computers & Laptops</a></li>
+							<li><a href="#">Cameras & Photos</a></li>
+							<li><a href="#">Hardware</a></li>
+							<li><a href="#">Smartphones & Tablets</a></li>
+							<li><a href="#">TV & Audio</a></li>
+						</ul>
+						<div class="footer_subtitle">Gadgets</div>
+						<ul class="footer_list">
+							<li><a href="#">Car Electronics</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-lg-2">
+					<div class="footer_column">
+						<ul class="footer_list footer_list_2">
+							<li><a href="#">Video Games & Consoles</a></li>
+							<li><a href="#">Accessories</a></li>
+							<li><a href="#">Cameras & Photos</a></li>
+							<li><a href="#">Hardware</a></li>
+							<li><a href="#">Computers & Laptops</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-lg-2">
+					<div class="footer_column">
+						<div class="footer_title">Customer Care</div>
+						<ul class="footer_list">
+							<li><a href="#">My Account</a></li>
+							<li><a href="#">Order Tracking</a></li>
+							<li><a href="#">Wish List</a></li>
+							<li><a href="#">Customer Services</a></li>
+							<li><a href="#">Returns / Exchange</a></li>
+							<li><a href="#">FAQs</a></li>
+							<li><a href="#">Product Support</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</footer>
+
+	<!-- Copyright -->
+
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					
+					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start"  align="center">
+						<div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</div>
+	
+	
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+	<!-- Custom js -->
+    <script src="js/custom_signup.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+	<!-- Custom js -->
+    <script type="text/JavaScript" src="js/custom_signup.js"></script>
 </body>
+
 </html>
