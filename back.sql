@@ -168,17 +168,14 @@ CREATE TABLE Order_Detail(
   check (Quantity >0)
 );
 
-CREATE TABLE Guest (
-customer_ID int NOT NULL AUTO_INCREMENT,
-  Email_ID varchar(255) not null,
-  FirstName varchar(255)not null,
-  LastName varchar(255),
-  Street_name varchar(255) not null,
-  City varchar(255) not null,
-  Date_logged_In datetime,
-  PRIMARY KEY (customer_ID)
+CCREATE TABLE date_joined(
+	customer_ID int,
+	date_joined date,
+	primary key(customer_ID),
+	Foreign key (customer_ID) references customer(customer_ID)
+    ON DELETE CASCADE
+   ON UPDATE CASCADE
 );
-
 
 CREATE TABLE Customer_Telephone (
   customer_ID int,
