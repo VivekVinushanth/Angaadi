@@ -1,3 +1,4 @@
+
 drop database if exists angaadi_users;
 
 CREATE database angaadi_users ;
@@ -19,7 +20,6 @@ image longblob,
 unique(username),
 
 primary key (username,customer_ID)
-
 
 );
 
